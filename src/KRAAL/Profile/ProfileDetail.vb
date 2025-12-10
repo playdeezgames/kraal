@@ -21,6 +21,9 @@ Friend Module ProfileDetail
                                                              running = False
                                                          End Sub))
             End If
+            For Each faction In dataStore.Factions.AllForProfile(profile)
+                choices.Add(New Choice($"Faction: {faction.FactionName}", Sub() FactionDetail.Run(dataStore, faction)))
+            Next
             Choice.Pick("[olive]Now What?[/]", choices)
         Loop
     End Sub

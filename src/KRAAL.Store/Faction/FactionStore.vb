@@ -5,7 +5,7 @@ Friend Class FactionStore
 
     Private ReadOnly connection As MySqlConnection
 
-    Friend ReadOnly COUNT_FOR_PROFILE As String = $"
+    Private ReadOnly COUNT_FOR_PROFILE As String = $"
 SELECT 
     COUNT({COLUMN_FACTION_ID}) 
 FROM 
@@ -13,7 +13,7 @@ FROM
 WHERE 
     {COLUMN_PROFILE_ID}={PARAMETER_PROFILE_ID};"
 
-    Friend ReadOnly FIND_FACTION_BY_PROFILE_ID_AND_FACTION_NAME As String = $"
+    Private ReadOnly FIND_FACTION_BY_PROFILE_ID_AND_FACTION_NAME As String = $"
 SELECT 
     COUNT(1) 
 FROM 
@@ -22,7 +22,7 @@ WHERE
     {COLUMN_PROFILE_ID} = {PARAMETER_PROFILE_ID} AND 
     {COLUMN_FACTION_NAME}={PARAMETER_FACTION_NAME}"
 
-    Friend ReadOnly INSERT_FACTION As String = $"
+    Private ReadOnly INSERT_FACTION As String = $"
 INSERT INTO 
     {TABLE_FACTIONS}
         (
@@ -36,6 +36,17 @@ VALUES
     )
 RETURNING
     {COLUMN_FACTION_ID};"
+
+    Private ReadOnly LIST_FACTIONS_FOR_PROFILE As String = $"
+SELECT
+    {COLUMN_FACTION_ID},
+    {COLUMN_FACTION_NAME}
+FROM
+    {TABLE_FACTIONS}
+WHERE
+    {COLUMN_PROFILE_ID} = {PARAMETER_PROFILE_ID}
+ORDER BY
+    {COLUMN_FACTION_NAME}"
 
     Public Sub New(connection As MySqlConnection)
         Me.connection = connection
@@ -62,5 +73,18 @@ RETURNING
             command.Parameters.AddWithValue(PARAMETER_FACTION_NAME, factionName)
             Return New Faction(CInt(command.ExecuteScalar()), factionName)
         End Using
+    End Function
+
+    Public Function AllForProfile(profile As IProfile) As IEnumerable(Of IFaction) Implements IFactionStore.AllForProfile
+        Dim result As New List(Of IFaction)
+        Using command As New MySqlCommand(LIST_FACTIONS_FOR_PROFILE, connection)
+            command.Parameters.AddWithValue(PARAMETER_PROFILE_ID, profile.ProfileId)
+            Using reader = command.ExecuteReader()
+                While reader.Read()
+                    result.Add(New Faction(reader.GetInt32(0), reader.GetString(1)))
+                End While
+            End Using
+        End Using
+        Return result
     End Function
 End Class
