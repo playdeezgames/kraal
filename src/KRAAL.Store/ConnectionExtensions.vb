@@ -68,5 +68,17 @@ RETURNING
             Return command.ExecuteScalar
         End Using
     End Function
+    <Extension>
+    Friend Sub Delete(connection As MySqlConnection, viewName As String, filters As IEnumerable(Of (Column As String, Value As Object)))
+        Using command As New MySqlCommand($"DELETE FROM {viewName}{If(filters.Any, $"
+WHERE
+    {String.Join(" AND ", filters.Select(Function(x) $"{x.Column} = @{x.Column}"))}
+", String.Empty)};", connection)
+            For Each f In filters
+                command.Parameters.AddWithValue($"@{f.Column}", f.Value)
+            Next
+            command.ExecuteNonQuery()
+        End Using
+    End Sub
 End Module
 
