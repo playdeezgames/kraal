@@ -2,18 +2,6 @@
 
 Friend Class ProfileStore
     Implements IProfileStore
-    Private ReadOnly INSERT_PROFILE As String = $"
-INSERT INTO 
-    {TABLE_PROFILES}
-        (
-            {COLUMN_PROFILE_NAME}
-        ) 
-VALUES 
-    (
-        {PARAMETER_PROFILE_NAME}
-    ) 
-RETURNING 
-    {COLUMN_PROFILE_ID};"
     Private ReadOnly DELETE_PROFILE As String = $"
 DELETE FROM 
     {TABLE_PROFILES} 
@@ -56,9 +44,12 @@ WHERE
     End Function
 
     Public Function Create(profileName As String) As IProfile Implements IProfileStore.Create
-        Using command As New MySqlCommand(INSERT_PROFILE, connection)
-            command.Parameters.AddWithValue(PARAMETER_PROFILE_NAME, profileName)
-            Return New Profile(CInt(command.ExecuteScalar()), profileName)
-        End Using
+        Return New Profile(
+            CInt(connection.Create(
+                TABLE_PROFILES,
+                {
+                    (COLUMN_PROFILE_NAME, profileName)
+                },
+                COLUMN_PROFILE_ID)), profileName)
     End Function
 End Class

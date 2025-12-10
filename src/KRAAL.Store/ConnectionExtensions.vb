@@ -34,7 +34,7 @@ ORDER BY
     End Function
 
     <Extension>
-    Function GetCount(
+    Friend Function GetCount(
                      connection As MySqlConnection,
                      viewName As String,
                      filters As IEnumerable(Of (Column As String, Value As Object))) As Integer
@@ -52,4 +52,21 @@ WHERE
             Return CInt(command.ExecuteScalar)
         End Using
     End Function
+    <Extension>
+    Friend Function Create(connection As MySqlConnection, viewName As String, values As IEnumerable(Of (Column As String, Value As Object)), result As String) As Object
+        Using command As New MySqlCommand($"
+INSERT INTO 
+    {viewName}
+        ({String.Join(",", values.Select(Function(x) x.Column))}) 
+VALUES 
+    ({String.Join(",", values.Select(Function(x) $"@{x.Column}"))}) 
+RETURNING 
+    {result};", connection)
+            For Each v In values
+                command.Parameters.AddWithValue($"@{v.Column}", v.Value)
+            Next
+            Return command.ExecuteScalar
+        End Using
+    End Function
 End Module
+
