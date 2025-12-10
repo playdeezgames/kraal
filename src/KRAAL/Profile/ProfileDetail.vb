@@ -12,7 +12,8 @@ Friend Module ProfileDetail
             Dim factionCount = dataStore.Factions.CountForProfile(profile)
             Dim choices As New List(Of Choice) From
                        {
-                           New Choice("Go Back", Sub() running = False)
+                           New Choice("Go Back", Sub() running = False),
+                           New Choice("(new faction)", Sub() FactionAdd.Run(dataStore, profile))
                        }
             If factionCount < 1 Then
                 choices.Add(New Choice("Remove Profile", Sub()
