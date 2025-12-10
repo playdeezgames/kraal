@@ -9,6 +9,10 @@ Friend Class FactionStore
         Me.connection = connection
     End Sub
 
+    Public Sub Remove(faction As IFaction) Implements IFactionStore.Remove
+        connection.Delete(TABLE_FACTIONS, {(COLUMN_FACTION_ID, faction.FactionId)})
+    End Sub
+
     Public Function CountForProfile(profile As IProfile) As Integer Implements IFactionStore.CountForProfile
         Return connection.GetCount(TABLE_FACTIONS, {(COLUMN_PROFILE_ID, profile.ProfileId)})
     End Function

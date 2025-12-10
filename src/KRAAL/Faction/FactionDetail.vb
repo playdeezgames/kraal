@@ -10,7 +10,11 @@ Friend Module FactionDetail
             AnsiConsole.MarkupLine($"Faction Name: {faction.FactionName}")
             Dim choices As New List(Of Choice) From
                        {
-                           New Choice("Go Back", Sub() running = False)
+                           New Choice("Go Back", Sub() running = False),
+                           New Choice("Remove Faction", Sub()
+                                                            dataStore.Factions.Remove(faction)
+                                                            running = False
+                                                        End Sub)
                        }
             Choice.Pick("[olive]Now What?[/]", choices)
         Loop
