@@ -2,22 +2,7 @@
 
 Friend Class ProfileStore
     Implements IProfileStore
-    Friend ReadOnly LIST_PROFILES As String = $"
-SELECT 
-    {COLUMN_PROFILE_ID}, 
-    {COLUMN_PROFILE_NAME} 
-FROM 
-    {TABLE_PROFILES} 
-ORDER BY 
-    {COLUMN_PROFILE_NAME};"
-    Friend ReadOnly FIND_PROFILE_BY_NAME As String = $"
-SELECT 
-    COUNT(1) 
-FROM 
-    {TABLE_PROFILES} 
-WHERE 
-    {COLUMN_PROFILE_NAME} = {PARAMETER_PROFILE_NAME};"
-    Friend ReadOnly INSERT_PROFILE As String = $"
+    Private ReadOnly INSERT_PROFILE As String = $"
 INSERT INTO 
     {TABLE_PROFILES}
         (
@@ -29,7 +14,7 @@ VALUES
     ) 
 RETURNING 
     {COLUMN_PROFILE_ID};"
-    Friend ReadOnly DELETE_PROFILE As String = $"
+    Private ReadOnly DELETE_PROFILE As String = $"
 DELETE FROM 
     {TABLE_PROFILES} 
 WHERE 
@@ -43,15 +28,15 @@ WHERE
 
     Public ReadOnly Property All As IEnumerable(Of IProfile) Implements IProfileStore.All
         Get
-            Dim result As New List(Of IProfile)
-            Using command As New MySqlCommand(LIST_PROFILES, connection)
-                Using reader = command.ExecuteReader()
-                    While reader.Read()
-                        result.Add(New Profile(reader.GetInt32(0), reader.GetString(1)))
-                    End While
-                End Using
-            End Using
-            Return result
+            Return connection.GetList(Of IProfile)(
+                TABLE_PROFILES,
+                {
+                    COLUMN_PROFILE_ID,
+                    COLUMN_PROFILE_NAME
+                },
+                Array.Empty(Of (String, Object)),
+                COLUMN_PROFILE_NAME,
+                Function(reader) New Profile(reader.GetInt32(0), reader.GetString(1)))
         End Get
     End Property
 
@@ -63,10 +48,11 @@ WHERE
     End Sub
 
     Public Function DoesNameExist(profileName As String) As Boolean Implements IProfileStore.DoesNameExist
-        Using command As New MySqlCommand(FIND_PROFILE_BY_NAME, connection)
-            command.Parameters.AddWithValue(PARAMETER_PROFILE_NAME, profileName)
-            Return CInt(command.ExecuteScalar()) > 0
-        End Using
+        Return connection.GetCount(
+            TABLE_PROFILES,
+            {
+                (COLUMN_PROFILE_NAME, profileName)
+            }) > 0
     End Function
 
     Public Function Create(profileName As String) As IProfile Implements IProfileStore.Create
