@@ -1,6 +1,6 @@
-﻿Public Class Profile
+﻿Friend Class Profile
     Implements IProfile
-    Sub New(profileId As Integer, profileName As String)
+    Friend Sub New(profileId As Integer, profileName As String)
         Me.ProfileId = profileId
         Me.ProfileName = profileName
     End Sub
