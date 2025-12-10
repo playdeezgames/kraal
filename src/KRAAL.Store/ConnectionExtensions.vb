@@ -3,7 +3,7 @@ Imports MySqlConnector
 
 Friend Module ConnectionExtensions
     <Extension>
-    Function GetList(Of T)(
+    Friend Function GetList(Of T)(
                           connection As MySqlConnection,
                           viewName As String,
                           columnNames As IEnumerable(Of String),
@@ -21,9 +21,7 @@ WHERE
 ", String.Empty)}
 ORDER BY 
     {order};", connection)
-            For Each f In filters
-                command.Parameters.AddWithValue($"@{f.Column}", f.Value)
-            Next
+            ApplyFilters(filters, command)
             Using reader = command.ExecuteReader
                 While reader.Read
                     result.Add(callback(reader))
@@ -32,6 +30,12 @@ ORDER BY
         End Using
         Return result
     End Function
+
+    Private Sub ApplyFilters(filters As IEnumerable(Of (Column As String, Value As Object)), command As MySqlCommand)
+        For Each f In filters
+            command.Parameters.AddWithValue($"@{f.Column}", f.Value)
+        Next
+    End Sub
 
     <Extension>
     Friend Function GetCount(
@@ -46,9 +50,7 @@ FROM
 WHERE
     {String.Join(" AND ", filters.Select(Function(x) $"{x.Column} = @{x.Column}"))}
 ", String.Empty)}", connection)
-            For Each f In filters
-                command.Parameters.AddWithValue($"@{f.Column}", f.Value)
-            Next
+            ApplyFilters(filters, command)
             Return CInt(command.ExecuteScalar)
         End Using
     End Function
@@ -62,9 +64,7 @@ VALUES
     ({String.Join(",", values.Select(Function(x) $"@{x.Column}"))}) 
 RETURNING 
     {result};", connection)
-            For Each v In values
-                command.Parameters.AddWithValue($"@{v.Column}", v.Value)
-            Next
+            ApplyFilters(values, command)
             Return command.ExecuteScalar
         End Using
     End Function
@@ -74,9 +74,7 @@ RETURNING
 WHERE
     {String.Join(" AND ", filters.Select(Function(x) $"{x.Column} = @{x.Column}"))}
 ", String.Empty)};", connection)
-            For Each f In filters
-                command.Parameters.AddWithValue($"@{f.Column}", f.Value)
-            Next
+            ApplyFilters(filters, command)
             command.ExecuteNonQuery()
         End Using
     End Sub
