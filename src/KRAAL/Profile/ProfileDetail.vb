@@ -8,6 +8,7 @@ Friend Module ProfileDetail
             AnsiConsole.Clear()
             AnsiConsole.MarkupLine($"Profile Id: {profile.ProfileId}")
             AnsiConsole.MarkupLine($"Profile Name: {profile.ProfileName}")
+            AnsiConsole.MarkupLine($"Factions: {dataStore.Factions.CountForProfile(profile)}")
             Dim factionCount = dataStore.Factions.CountForProfile(profile)
             Dim choices As New List(Of Choice) From
                        {
