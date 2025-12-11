@@ -9,7 +9,7 @@ Friend Class BuildingStore
         Me.connection = connection
     End Sub
 
-    Public Function Create(faction As IFaction, buildingName As String) As IBuilding Implements IBuildingStore.Create
+    Public Function Create(faction As IFactionDTO, buildingName As String) As IBuildingDTO Implements IBuildingStore.Create
         Dim buildingId = CInt(connection.Create(
             TABLE_BUILDINGS,
             {
@@ -17,10 +17,10 @@ Friend Class BuildingStore
                 (COLUMN_BUILDING_NAME, buildingName)
             },
             COLUMN_BUILDING_ID))
-        Return New Building(buildingId, buildingName)
+        Return New BuildingDTO(buildingId, buildingName)
     End Function
 
-    Public Function CountForFaction(faction As IFaction) As Integer Implements IBuildingStore.CountForFaction
+    Public Function CountForFaction(faction As IFactionDTO) As Integer Implements IBuildingStore.CountForFaction
         Return connection.GetCount(
             TABLE_BUILDINGS,
             {
@@ -28,8 +28,8 @@ Friend Class BuildingStore
             })
     End Function
 
-    Public Function AllForFaction(faction As IFaction) As IEnumerable(Of IBuilding) Implements IBuildingStore.AllForFaction
-        Return connection.GetList(Of IBuilding)(
+    Public Function AllForFaction(faction As IFactionDTO) As IEnumerable(Of IBuildingDTO) Implements IBuildingStore.AllForFaction
+        Return connection.GetList(Of IBuildingDTO)(
             TABLE_BUILDINGS,
             {
                 COLUMN_BUILDING_ID,
@@ -39,6 +39,6 @@ Friend Class BuildingStore
                 (COLUMN_FACTION_ID, faction.FactionId)
             },
             COLUMN_BUILDING_NAME,
-            Function(reader) New Building(reader.GetInt32(0), reader.GetString(1)))
+            Function(reader) New BuildingDTO(reader.GetInt32(0), reader.GetString(1)))
     End Function
 End Class

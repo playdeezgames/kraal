@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>KRAAL</RootNamespace>
+    <RootNamespace>KRAAL.Domain</RootNamespace>
     <TargetFramework>net10.0</TargetFramework>
     <OptionStrict>On</OptionStrict>
   </PropertyGroup>
@@ -16,11 +15,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Spectre.Console" Version="0.54.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\KRAAL.Domain\KRAAL.Domain.vbproj" />
     <ProjectReference Include="..\KRAAL.Store\KRAAL.Store.vbproj" />
   </ItemGroup>
 

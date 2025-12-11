@@ -10,17 +10,17 @@ Friend Class HousingStore
         Me.connection = connection
     End Sub
 
-    Public Function Create(building As IBuilding) As IHousing Implements IHousingStore.Create
+    Public Function Create(building As IBuildingDTO) As IHousingDTO Implements IHousingStore.Create
         Dim housingId = CInt(connection.Create(
             TABLE_HOUSINGS,
             {
                 (COLUMN_BUILDING_ID, building.BuildingId)
             },
             COLUMN_HOUSING_ID))
-        Return New Housing(housingId)
+        Return New HousingDTO(housingId)
     End Function
 
-    Public Function FindForUnit(unit As IUnit) As IHousing Implements IHousingStore.FindForUnit
+    Public Function FindForUnit(unit As IUnitDTO) As IHousingDTO Implements IHousingStore.FindForUnit
         Dim housingIds = connection.GetList(Of Integer)(
             TABLE_UNITS,
             {
@@ -34,6 +34,6 @@ Friend Class HousingStore
         If Not housingIds.Any Then
             Return Nothing
         End If
-        Return New Housing(housingIds.Single)
+        Return New HousingDTO(housingIds.Single)
     End Function
 End Class

@@ -2,7 +2,7 @@
 Imports Spectre.Console
 
 Friend Module FactionBuildingList
-    Friend Sub Run(dataStore As IDataStore, faction As IFaction)
+    Friend Sub Run(dataStore As IDataStore, faction As IFactionDTO)
         Dim running = True
         Do While running
             AnsiConsole.Clear()

@@ -83,5 +83,23 @@ WHERE
             command.ExecuteNonQuery()
         End Using
     End Sub
+    <Extension>
+    Friend Sub Update(
+                     connection As MySqlConnection,
+                     viewName As String,
+                     values As IEnumerable(Of (Column As String, Value As Object)),
+                     filters As IEnumerable(Of (Column As String, Value As Object)))
+        Using command As New MySqlCommand($"
+UPDATE 
+    {viewName} 
+SET 
+    {String.Join(",", values.Select(Function(x) $"{x.Column} = @{x.Column}"))} 
+WHERE 
+    {String.Join(" AND ", filters.Select(Function(x) $"{x.Column} = @{x.Column}"))};", connection)
+            ApplyFilters(filters, command)
+            ApplyFilters(values, command)
+            command.ExecuteNonQuery()
+        End Using
+    End Sub
 End Module
 

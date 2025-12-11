@@ -1,5 +1,5 @@
 ﻿Friend Class UnitDetail
-    Implements IUnitDetail
+    Implements IUnitDetailDTO
     Sub New(
            unitId As Integer,
            unitName As String,
@@ -16,11 +16,11 @@
         Me.FactionId = factionId
         Me.FactionName = factionName
     End Sub
-    Public ReadOnly Property HousingBuildingId As Integer? Implements IUnitDetail.HousingBuildingId
-    Public ReadOnly Property HousingBuildingName As String Implements IUnitDetail.HousingBuildingName
-    Public ReadOnly Property UnitId As Integer Implements IUnit.UnitId
-    Public ReadOnly Property UnitName As String Implements IUnit.UnitName
-    Public ReadOnly Property HousingId As Integer? Implements IUnitDetail.HousingId
-    Public ReadOnly Property FactionId As Integer Implements IFaction.FactionId
-    Public ReadOnly Property FactionName As String Implements IFaction.FactionName
+    Public ReadOnly Property HousingBuildingId As Integer? Implements IUnitDetailDTO.HousingBuildingId
+    Public ReadOnly Property HousingBuildingName As String Implements IUnitDetailDTO.HousingBuildingName
+    Public ReadOnly Property UnitId As Integer Implements IUnitDTO.UnitId
+    Public ReadOnly Property UnitName As String Implements IUnitDTO.UnitName
+    Public ReadOnly Property HousingId As Integer? Implements IUnitDetailDTO.HousingId
+    Public ReadOnly Property FactionId As Integer Implements IFactionDTO.FactionId
+    Public ReadOnly Property FactionName As String Implements IFactionDTO.FactionName
 End Class

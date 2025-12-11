@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="KRAAL.Domain/KRAAL.Domain.vbproj" Id="cfd99e2f-1a5a-4879-9770-1295bac29afa" />
   <Project Path="KRAAL.Store/KRAAL.Store.vbproj" Id="8f5b10e4-ecd8-4db8-a266-23e4b70ab7d1" />
   <Project Path="KRAAL/KRAAL.vbproj" />
 </Solution>

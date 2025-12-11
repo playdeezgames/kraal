@@ -1,4 +1,4 @@
 ﻿Public Interface IHousingStore
-    Function Create(building As IBuilding) As IHousing
-    Function FindForUnit(unit As IUnit) As IHousing
+    Function Create(building As IBuildingDTO) As IHousingDTO
+    Function FindForUnit(unit As IUnitDTO) As IHousingDTO
 End Interface

@@ -2,7 +2,7 @@
 Imports Spectre.Console
 
 Friend Module ProfileDetail
-    Friend Sub Run(dataStore As IDataStore, profile As IProfile)
+    Friend Sub Run(dataStore As IDataStore, profile As IProfileDTO)
         Dim running As Boolean = True
         Do While running
             AnsiConsole.Clear()

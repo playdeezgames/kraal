@@ -1,5 +1,5 @@
 ﻿Public Interface IBuildingStore
-    Function Create(faction As IFaction, buildingName As String) As IBuilding
-    Function CountForFaction(faction As IFaction) As Integer
-    Function AllForFaction(faction As IFaction) As IEnumerable(Of IBuilding)
+    Function Create(faction As IFactionDTO, buildingName As String) As IBuildingDTO
+    Function CountForFaction(faction As IFactionDTO) As Integer
+    Function AllForFaction(faction As IFactionDTO) As IEnumerable(Of IBuildingDTO)
 End Interface

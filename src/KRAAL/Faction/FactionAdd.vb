@@ -4,7 +4,7 @@ Imports Spectre.Console
 
 Friend Module FactionAdd
     ReadOnly unitNames As String() = {"Moe", "Larry", "Curly"}
-    Friend Sub Run(dataStore As IDataStore, profile As IProfile)
+    Friend Sub Run(dataStore As IDataStore, profile As IProfileDTO)
         Dim factionName = AnsiConsole.Ask("[olive]Faction Name:[/]", String.Empty)
         If String.IsNullOrWhiteSpace(factionName) Then
             Return
@@ -14,7 +14,7 @@ Friend Module FactionAdd
             Return
         End If
         Dim faction = dataStore.Factions.Create(profile, factionName)
-        Dim building As IBuilding = dataStore.Buildings.Create(faction, "Dormitory")
+        Dim building As IBuildingDTO = dataStore.Buildings.Create(faction, "Dormitory")
         Dim housings = Enumerable.
             Range(0, 5).
             Select(Function(x) dataStore.Housings.Create(building)).ToList

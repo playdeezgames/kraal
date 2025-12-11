@@ -9,11 +9,22 @@ Friend Class UnitStore
         Me.connection = connection
     End Sub
 
-    Public Sub Remove(unit As IUnit) Implements IUnitStore.Remove
+    Public Sub Remove(unit As IUnitDTO) Implements IUnitStore.Remove
         connection.Delete(TABLE_UNITS, {(COLUMN_UNIT_ID, unit.UnitId)})
     End Sub
 
-    Public Function CountForFaction(faction As IFaction) As Integer Implements IUnitStore.CountForFaction
+    Public Sub SetHousing(unit As IUnitDTO, housing As IHousingDTO) Implements IUnitStore.SetHousing
+        connection.Update(
+            TABLE_UNITS,
+            {
+                (COLUMN_HOUSING_ID, If(housing IsNot Nothing, CObj(housing.HousingId), DBNull.Value))
+            },
+            {
+                (COLUMN_UNIT_ID, unit.UnitId)
+            })
+    End Sub
+
+    Public Function CountForFaction(faction As IFactionDTO) As Integer Implements IUnitStore.CountForFaction
         Return connection.GetCount(
             TABLE_UNITS,
             {
@@ -21,7 +32,7 @@ Friend Class UnitStore
             })
     End Function
 
-    Public Function Create(faction As IFaction, unitName As String, housing As IHousing) As IUnit Implements IUnitStore.Create
+    Public Function Create(faction As IFactionDTO, unitName As String, housing As IHousingDTO) As IUnitDTO Implements IUnitStore.Create
         Dim values As New List(Of (Column As String, Value As Object)) From
             {
                 (COLUMN_UNIT_NAME, unitName),
@@ -31,11 +42,11 @@ Friend Class UnitStore
             values.Add((COLUMN_HOUSING_ID, housing.HousingId))
         End If
         Dim unitId = CInt(connection.Create(TABLE_UNITS, values, COLUMN_UNIT_ID))
-        Return New Unit(unitId, unitName)
+        Return New UnitDTO(unitId, unitName)
     End Function
 
-    Public Function AllForFaction(faction As IFaction) As IEnumerable(Of IUnit) Implements IUnitStore.AllForFaction
-        Return connection.GetList(Of IUnit)(
+    Public Function AllForFaction(faction As IFactionDTO) As IEnumerable(Of IUnitDTO) Implements IUnitStore.AllForFaction
+        Return connection.GetList(Of IUnitDTO)(
             TABLE_UNITS,
             {
                 COLUMN_UNIT_ID,
@@ -45,11 +56,11 @@ Friend Class UnitStore
                 (COLUMN_FACTION_ID, faction.FactionId)
             },
             COLUMN_UNIT_NAME,
-            Function(reader) New Unit(reader.GetInt32(0), reader.GetString(1)))
+            Function(reader) New UnitDTO(reader.GetInt32(0), reader.GetString(1)))
     End Function
 
-    Public Function GetDetail(unit As IUnit) As IUnitDetail Implements IUnitStore.GetDetail
-        Return connection.GetList(Of IUnitDetail)(
+    Public Function GetDetail(unit As IUnitDTO) As IUnitDetailDTO Implements IUnitStore.GetDetail
+        Return connection.GetList(Of IUnitDetailDTO)(
             VIEW_UNIT_DETAILS,
             {
                 COLUMN_UNIT_ID,
@@ -66,9 +77,9 @@ Friend Class UnitStore
             COLUMN_UNIT_ID, Function(reader) New UnitDetail(
                 reader.GetInt32(0),
                 reader.GetString(1),
-                reader.GetInt32(2),
-                reader.GetInt32(3),
-                reader.GetString(4),
+                If(Not reader.IsDBNull(2), reader.GetInt32(2), CType(Nothing, Integer?)),
+                If(Not reader.IsDBNull(3), reader.GetInt32(3), CType(Nothing, Integer?)),
+                If(Not reader.IsDBNull(4), reader.GetString(4), Nothing),
                 reader.GetInt32(5),
                 reader.GetString(6))).SingleOrDefault
     End Function
