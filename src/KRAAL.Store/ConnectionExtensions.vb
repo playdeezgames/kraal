@@ -9,7 +9,7 @@ Friend Module ConnectionExtensions
                           columnNames As IEnumerable(Of String),
                           filters As IEnumerable(Of (Column As String, Value As Object)),
                           order As String,
-                          callback As Func(Of MySqlDataReader, T)) As IEnumerable(Of T)
+                          callback As Func(Of MySqlDataReader, IStoreResult, T)) As IEnumerable(Of T)
         Dim result As New List(Of T)
         Using command As New MySqlCommand($"
 SELECT 
@@ -23,8 +23,9 @@ ORDER BY
     {order};", connection)
             ApplyFilters(filters, command)
             Using reader = command.ExecuteReader
+                Dim storeResult As IStoreResult = New StoreResult(reader)
                 While reader.Read
-                    result.Add(callback(reader))
+                    result.Add(callback(reader, storeResult))
                 End While
             End Using
         End Using

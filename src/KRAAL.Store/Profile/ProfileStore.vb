@@ -18,7 +18,7 @@ Friend Class ProfileStore
                 },
                 Array.Empty(Of (String, Object)),
                 COLUMN_PROFILE_NAME,
-                Function(reader) New ProfileDTO(reader.GetInt32(0), reader.GetString(1)))
+                Function(reader, result) New ProfileDTO(result.GetInt32(0), result.GetString(1)))
         End Get
     End Property
 

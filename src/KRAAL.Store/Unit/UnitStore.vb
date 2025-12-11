@@ -56,7 +56,7 @@ Friend Class UnitStore
                 (COLUMN_FACTION_ID, faction.FactionId)
             },
             COLUMN_UNIT_NAME,
-            Function(reader) New UnitDTO(reader.GetInt32(0), reader.GetString(1)))
+            Function(reader, result) New UnitDTO(result.GetInt32(0), result.GetString(1)))
     End Function
 
     Public Function GetDetail(unit As IUnitDTO) As IUnitDetailDTO Implements IUnitStore.GetDetail
@@ -74,13 +74,13 @@ Friend Class UnitStore
             {
                 (COLUMN_UNIT_ID, unit.UnitId)
             },
-            COLUMN_UNIT_ID, Function(reader) New UnitDetail(
-                reader.GetInt32(0),
-                reader.GetString(1),
-                If(Not reader.IsDBNull(2), reader.GetInt32(2), CType(Nothing, Integer?)),
-                If(Not reader.IsDBNull(3), reader.GetInt32(3), CType(Nothing, Integer?)),
-                If(Not reader.IsDBNull(4), reader.GetString(4), Nothing),
-                reader.GetInt32(5),
-                reader.GetString(6))).SingleOrDefault
+            COLUMN_UNIT_ID, Function(reader, result) New UnitDetail(
+                result.GetInt32(0),
+                result.GetString(1),
+                If(Not result.IsDBNull(2), result.GetInt32(2), CType(Nothing, Integer?)),
+                If(Not result.IsDBNull(3), result.GetInt32(3), CType(Nothing, Integer?)),
+                If(Not result.IsDBNull(4), result.GetString(4), Nothing),
+                result.GetInt32(5),
+                result.GetString(6))).SingleOrDefault
     End Function
 End Class
