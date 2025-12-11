@@ -11,6 +11,7 @@ Friend Module FactionAdd
             Choice.Pause($"[red]That faction name('{factionName}') exists already![/]")
             Return
         End If
-        FactionDetail.Run(dataStore, dataStore.Factions.Create(profile, factionName))
+        Dim faction = dataStore.Factions.Create(profile, factionName)
+        FactionDetail.Run(dataStore, faction)
     End Sub
 End Module
