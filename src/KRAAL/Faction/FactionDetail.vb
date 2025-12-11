@@ -21,6 +21,9 @@ Friend Module FactionDetail
             If dataStore.Units.CountForFaction(faction) > 0 Then
                 choices.Add(New Choice("Units...", Sub() FactionUnitList.Run(dataStore, faction)))
             End If
+            If dataStore.Buildings.CountForFaction(faction) > 0 Then
+                choices.Add(New Choice("Buildings...", Sub() FactionBuildingList.Run(dataStore, faction)))
+            End If
             Choice.Pick("[olive]Now What?[/]", choices)
         Loop
     End Sub
