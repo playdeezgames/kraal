@@ -21,8 +21,16 @@ Friend Class UnitStore
             })
     End Function
 
-    Public Function Create(faction As IFaction, unitName As String) As IUnit Implements IUnitStore.Create
-        Dim unitId = CInt(connection.Create(TABLE_UNITS, {(COLUMN_UNIT_NAME, unitName), (COLUMN_FACTION_ID, faction.FactionId)}, COLUMN_UNIT_ID))
+    Public Function Create(faction As IFaction, unitName As String, housing As IHousing) As IUnit Implements IUnitStore.Create
+        Dim values As New List(Of (Column As String, Value As Object)) From
+            {
+                (COLUMN_UNIT_NAME, unitName),
+                (COLUMN_FACTION_ID, faction.FactionId)
+            }
+        If housing IsNot Nothing Then
+            values.Add((COLUMN_HOUSING_ID, housing.HousingId))
+        End If
+        Dim unitId = CInt(connection.Create(TABLE_UNITS, values, COLUMN_UNIT_ID))
         Return New Unit(unitId, unitName)
     End Function
 

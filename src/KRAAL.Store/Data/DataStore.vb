@@ -22,6 +22,18 @@ Public Class DataStore
         End Get
     End Property
 
+    Public ReadOnly Property Buildings As IBuildingStore Implements IDataStore.Buildings
+        Get
+            Return New BuildingStore(connection)
+        End Get
+    End Property
+
+    Public ReadOnly Property Housings As IHousingStore Implements IDataStore.Housings
+        Get
+            Return New HousingStore(connection)
+        End Get
+    End Property
+
     Public Sub Open(connectionString As String) Implements IDataStore.Open
         connection = New MySqlConnection(connectionString)
         connection.Open()

@@ -1,4 +1,5 @@
-﻿Imports KRAAL.Store
+﻿Imports System.IO
+Imports KRAAL.Store
 Imports Spectre.Console
 
 Friend Module FactionAdd
@@ -13,8 +14,16 @@ Friend Module FactionAdd
             Return
         End If
         Dim faction = dataStore.Factions.Create(profile, factionName)
+        Dim building As IBuilding = dataStore.Buildings.Create(faction, "Dormitory")
+        Dim housings = Enumerable.
+            Range(0, 5).
+            Select(Function(x) dataStore.Housings.Create(building)).ToList
         For Each unitName In unitNames
-            dataStore.Units.Create(faction, unitName)
+            Dim housing = housings.FirstOrDefault
+            dataStore.Units.Create(faction, unitName, housing)
+            If housing IsNot Nothing Then
+                housings.Remove(housing)
+            End If
         Next
         FactionDetail.Run(dataStore, faction)
     End Sub

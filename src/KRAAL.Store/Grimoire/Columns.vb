@@ -5,4 +5,7 @@
     Friend Const COLUMN_PROFILE_NAME = "profile_name"
     Friend Const COLUMN_UNIT_ID = "unit_id"
     Friend Const COLUMN_UNIT_NAME = "unit_name"
+    Friend Const COLUMN_BUILDING_ID = "building_id"
+    Friend Const COLUMN_BUILDING_NAME = "building_name"
+    Friend Const COLUMN_HOUSING_ID = "housing_id"
 End Module
