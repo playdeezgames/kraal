@@ -48,6 +48,6 @@ Friend Class FactionStore
                 (COLUMN_PROFILE_ID, profile.ProfileId)
             },
             COLUMN_FACTION_NAME,
-            Function(reader, result) New FactionDTO(result.GetInt32(0), result.GetString(1)))
+            Function(result) New FactionDTO(result.GetInt32(0), result.GetString(1)))
     End Function
 End Class

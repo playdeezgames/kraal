@@ -30,7 +30,7 @@ Friend Class HousingStore
                 (COLUMN_UNIT_ID, unit.UnitId)
             },
             COLUMN_HOUSING_ID,
-            Function(reader, result) result.GetInt32(0))
+            Function(result) result.GetInt32(0))
         If Not housingIds.Any Then
             Return Nothing
         End If

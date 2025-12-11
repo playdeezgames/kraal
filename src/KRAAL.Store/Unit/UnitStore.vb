@@ -56,7 +56,7 @@ Friend Class UnitStore
                 (COLUMN_FACTION_ID, faction.FactionId)
             },
             COLUMN_UNIT_NAME,
-            Function(reader, result) New UnitDTO(result.GetInt32(0), result.GetString(1)))
+            Function(result) New UnitDTO(result.GetInt32(0), result.GetString(1)))
     End Function
 
     Public Function GetDetail(unit As IUnitDTO) As IUnitDetailDTO Implements IUnitStore.GetDetail
@@ -74,7 +74,7 @@ Friend Class UnitStore
             {
                 (COLUMN_UNIT_ID, unit.UnitId)
             },
-            COLUMN_UNIT_ID, Function(reader, result) New UnitDetail(
+            COLUMN_UNIT_ID, Function(result) New UnitDetail(
                 result.GetInt32(0),
                 result.GetString(1),
                 If(Not result.IsDBNull(2), result.GetInt32(2), CType(Nothing, Integer?)),

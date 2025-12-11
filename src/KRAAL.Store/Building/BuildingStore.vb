@@ -39,6 +39,6 @@ Friend Class BuildingStore
                 (COLUMN_FACTION_ID, faction.FactionId)
             },
             COLUMN_BUILDING_NAME,
-            Function(reader, result) New BuildingDTO(result.GetInt32(0), result.GetString(1)))
+            Function(result) New BuildingDTO(result.GetInt32(0), result.GetString(1)))
     End Function
 End Class
