@@ -16,6 +16,12 @@ Public Class DataStore
         End Get
     End Property
 
+    Public ReadOnly Property Units As IUnitStore Implements IDataStore.Units
+        Get
+            Return New UnitStore(connection)
+        End Get
+    End Property
+
     Public Sub Open(connectionString As String) Implements IDataStore.Open
         connection = New MySqlConnection(connectionString)
         connection.Open()

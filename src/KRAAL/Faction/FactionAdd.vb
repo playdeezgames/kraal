@@ -2,6 +2,7 @@
 Imports Spectre.Console
 
 Friend Module FactionAdd
+    ReadOnly unitNames As String() = {"Moe", "Larry", "Curly"}
     Friend Sub Run(dataStore As IDataStore, profile As IProfile)
         Dim factionName = AnsiConsole.Ask("[olive]Faction Name:[/]", String.Empty)
         If String.IsNullOrWhiteSpace(factionName) Then
@@ -12,6 +13,9 @@ Friend Module FactionAdd
             Return
         End If
         Dim faction = dataStore.Factions.Create(profile, factionName)
+        For Each unitName In unitNames
+            dataStore.Units.Create(faction, unitName)
+        Next
         FactionDetail.Run(dataStore, faction)
     End Sub
 End Module

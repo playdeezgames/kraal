@@ -3,4 +3,6 @@
     Friend Const COLUMN_FACTION_NAME = "faction_name"
     Friend Const COLUMN_PROFILE_ID = "profile_id"
     Friend Const COLUMN_PROFILE_NAME = "profile_name"
+    Friend Const COLUMN_UNIT_ID = "unit_id"
+    Friend Const COLUMN_UNIT_NAME = "unit_name"
 End Module

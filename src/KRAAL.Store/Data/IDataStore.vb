@@ -3,4 +3,5 @@
     Sub Close()
     ReadOnly Property Profiles As IProfileStore
     ReadOnly Property Factions As IFactionStore
+    ReadOnly Property Units As IUnitStore
 End Interface
