@@ -6,8 +6,14 @@ Friend Module UnitDetail
         Dim running = True
         Do While running
             AnsiConsole.Clear()
-            AnsiConsole.MarkupLine($"Unit Id: {unit.UnitId}")
-            AnsiConsole.MarkupLine($"Unit Name: {unit.UnitName}")
+            Dim details = dataStore.Units.GetDetail(unit)
+            AnsiConsole.MarkupLine($"Unit Id: {details.UnitId}")
+            AnsiConsole.MarkupLine($"Unit Name: {details.UnitName}")
+            AnsiConsole.MarkupLine($"Housing Id: {details.HousingId}")
+            AnsiConsole.MarkupLine($"Building Id: {details.HousingBuildingId}")
+            AnsiConsole.MarkupLine($"Building Name: {details.HousingBuildingName}")
+            AnsiConsole.MarkupLine($"Faction Id: {details.FactionId}")
+            AnsiConsole.MarkupLine($"Faction Name: {details.FactionName}")
             Dim choices As New List(Of Choice) From
                 {
                     New Choice("Go Back", Sub() running = False)

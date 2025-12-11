@@ -47,4 +47,29 @@ Friend Class UnitStore
             COLUMN_UNIT_NAME,
             Function(reader) New Unit(reader.GetInt32(0), reader.GetString(1)))
     End Function
+
+    Public Function GetDetail(unit As IUnit) As IUnitDetail Implements IUnitStore.GetDetail
+        Return connection.GetList(Of IUnitDetail)(
+            VIEW_UNIT_DETAILS,
+            {
+                COLUMN_UNIT_ID,
+                COLUMN_UNIT_NAME,
+                COLUMN_HOUSING_ID,
+                COLUMN_HOUSING_BUILDING_ID,
+                COLUMN_HOUSING_BUILDING_NAME,
+                COLUMN_FACTION_ID,
+                COLUMN_FACTION_NAME
+            },
+            {
+                (COLUMN_UNIT_ID, unit.UnitId)
+            },
+            COLUMN_UNIT_ID, Function(reader) New UnitDetail(
+                reader.GetInt32(0),
+                reader.GetString(1),
+                reader.GetInt32(2),
+                reader.GetInt32(3),
+                reader.GetString(4),
+                reader.GetInt32(5),
+                reader.GetString(6))).SingleOrDefault
+    End Function
 End Class

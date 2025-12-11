@@ -1,9 +1,10 @@
-﻿Imports MySqlConnector
+﻿Imports System.Reflection.Metadata.Ecma335
+Imports MySqlConnector
 
 Friend Class HousingStore
     Implements IHousingStore
 
-    Private connection As MySqlConnection
+    Private ReadOnly connection As MySqlConnection
 
     Public Sub New(connection As MySqlConnection)
         Me.connection = connection
@@ -17,5 +18,22 @@ Friend Class HousingStore
             },
             COLUMN_HOUSING_ID))
         Return New Housing(housingId)
+    End Function
+
+    Public Function FindForUnit(unit As IUnit) As IHousing Implements IHousingStore.FindForUnit
+        Dim housingIds = connection.GetList(Of Integer)(
+            TABLE_UNITS,
+            {
+                COLUMN_HOUSING_ID
+            },
+            {
+                (COLUMN_UNIT_ID, unit.UnitId)
+            },
+            COLUMN_HOUSING_ID,
+            Function(reader) reader.GetInt32(0))
+        If Not housingIds.Any Then
+            Return Nothing
+        End If
+        Return New Housing(housingIds.Single)
     End Function
 End Class

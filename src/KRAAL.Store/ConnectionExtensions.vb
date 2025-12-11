@@ -31,7 +31,9 @@ ORDER BY
         Return result
     End Function
 
-    Private Sub ApplyFilters(filters As IEnumerable(Of (Column As String, Value As Object)), command As MySqlCommand)
+    Private Sub ApplyFilters(
+                            filters As IEnumerable(Of (Column As String, Value As Object)),
+                            command As MySqlCommand)
         For Each f In filters
             command.Parameters.AddWithValue($"@{f.Column}", f.Value)
         Next
@@ -69,7 +71,10 @@ RETURNING
         End Using
     End Function
     <Extension>
-    Friend Sub Delete(connection As MySqlConnection, viewName As String, filters As IEnumerable(Of (Column As String, Value As Object)))
+    Friend Sub Delete(
+                     connection As MySqlConnection,
+                     viewName As String,
+                     filters As IEnumerable(Of (Column As String, Value As Object)))
         Using command As New MySqlCommand($"DELETE FROM {viewName}{If(filters.Any, $"
 WHERE
     {String.Join(" AND ", filters.Select(Function(x) $"{x.Column} = @{x.Column}"))}
