@@ -12,8 +12,10 @@ Friend Module FactionDetail
                        {
                            New Choice("Go Back", Sub() running = False),
                            New Choice("Remove Faction", Sub()
-                                                            dataStore.Factions.Remove(faction)
-                                                            running = False
+                                                            If Choice.Confirm("[red]Are you sure you want to remove this faction?[/]") Then
+                                                                dataStore.Factions.Remove(faction)
+                                                                running = False
+                                                            End If
                                                         End Sub)
                        }
             If dataStore.Units.CountForFaction(faction) > 0 Then

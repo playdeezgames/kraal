@@ -9,6 +9,10 @@ Friend Class UnitStore
         Me.connection = connection
     End Sub
 
+    Public Sub Remove(unit As IUnit) Implements IUnitStore.Remove
+        connection.Delete(TABLE_UNITS, {(COLUMN_UNIT_ID, unit.UnitId)})
+    End Sub
+
     Public Function CountForFaction(faction As IFaction) As Integer Implements IUnitStore.CountForFaction
         Return connection.GetCount(
             TABLE_UNITS,

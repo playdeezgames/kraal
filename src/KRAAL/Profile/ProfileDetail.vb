@@ -13,14 +13,14 @@ Friend Module ProfileDetail
             Dim choices As New List(Of Choice) From
                        {
                            New Choice("Go Back", Sub() running = False),
-                           New Choice("(new faction)", Sub() FactionAdd.Run(dataStore, profile))
+                           New Choice("(new faction)", Sub() FactionAdd.Run(dataStore, profile)),
+                           New Choice("Remove Profile", Sub()
+                                                            If Choice.Confirm("[red]Are you sure you want to remove this profile?[/]") Then
+                                                                dataStore.Profiles.Remove(profile)
+                                                                running = False
+                                                            End If
+                                                        End Sub)
                        }
-            If factionCount < 1 Then
-                choices.Add(New Choice("Remove Profile", Sub()
-                                                             dataStore.Profiles.Remove(profile)
-                                                             running = False
-                                                         End Sub))
-            End If
             For Each faction In dataStore.Factions.AllForProfile(profile)
                 choices.Add(New Choice($"Faction: {faction.FactionName}", Sub() FactionDetail.Run(dataStore, faction)))
             Next

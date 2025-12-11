@@ -21,4 +21,9 @@ Public Class Choice
     Public Shared Sub Pause(title As String)
         Pick(title, {New Choice("Ok", Sub() Return)})
     End Sub
+    Public Shared Function Confirm(title As String) As Boolean
+        Dim result As Boolean = False
+        Pick(title, {New Choice("No", Sub() result = False), New Choice("Yes", Sub() result = True)})
+        Return result
+    End Function
 End Class
