@@ -9,9 +9,9 @@ Friend Module UnitDetail
             AnsiConsole.Clear()
             AnsiConsole.MarkupLine($"Unit: {unit.UnitName}")
             If unit.HasHousing Then
-                AnsiConsole.MarkupLine($"Building: {unit.Housing.Building.BuildingName}")
+                AnsiConsole.MarkupLine($"Housing: {unit.Housing.UniqueName}")
             Else
-                AnsiConsole.MarkupLine($"Building: None")
+                AnsiConsole.MarkupLine($"Housing: None")
             End If
             AnsiConsole.MarkupLine($"Faction: {unit.Faction.FactionName}")
             Dim choices As New List(Of Choice) From
@@ -20,6 +20,8 @@ Friend Module UnitDetail
                 }
             If unit.HasHousing Then
                 choices.Add(New Choice("Unhouse", Sub() unit.Housing = Nothing))
+            ElseIf unit.Faction.HasAvailableHousing Then
+                choices.Add(New Choice("House...", Sub() Return))
             End If
             Choice.Pick("[olive]Now What?[/]", choices)
         Loop

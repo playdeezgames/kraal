@@ -15,4 +15,10 @@ Friend Class Housing
             Return New Building(store, CInt(store.GetColumnValue(TABLE_HOUSINGS, COLUMN_BUILDING_ID, (COLUMN_HOUSING_ID, HousingId))))
         End Get
     End Property
+
+    Public ReadOnly Property UniqueName As String Implements IHousing.UniqueName
+        Get
+            Return $"{Building.BuildingName}(#{Building.BuildingId}-{HousingId})"
+        End Get
+    End Property
 End Class

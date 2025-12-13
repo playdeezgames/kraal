@@ -66,6 +66,12 @@ Friend Class Faction
         End Get
     End Property
 
+    Public ReadOnly Property HasAvailableHousing As Boolean Implements IFaction.HasAvailableHousing
+        Get
+            Return store.GetCount(VIEW_FACTION_AVAILABLE_HOUSINGS, {(COLUMN_FACTION_ID, FactionId)}) > 0
+        End Get
+    End Property
+
     Public Sub Remove() Implements IFaction.Remove
         store.Delete(TABLE_FACTIONS, {(COLUMN_FACTION_ID, FactionId)})
     End Sub

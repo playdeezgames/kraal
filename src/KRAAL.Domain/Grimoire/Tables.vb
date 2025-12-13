@@ -4,5 +4,5 @@
     Friend Const TABLE_UNITS = "units"
     Friend Const TABLE_BUILDINGS = "buildings"
     Friend Const TABLE_HOUSINGS = "housings"
-    Friend Const VIEW_UNIT_DETAILS = "unit_details"
+    Friend Const VIEW_FACTION_AVAILABLE_HOUSINGS = "faction_available_housings"
 End Module
