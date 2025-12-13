@@ -3,4 +3,6 @@
     Function UniqueName() As String
     ReadOnly Property BuildingId As Integer
     Property BuildingName As String
+    ReadOnly Property HousingCount As Integer
+    ReadOnly Property Housings As IEnumerable(Of IHousing)
 End Interface

@@ -19,6 +19,28 @@ Friend Class Building
         End Set
     End Property
 
+    Public ReadOnly Property HousingCount As Integer Implements IBuilding.HousingCount
+        Get
+            Return store.GetCount(TABLE_HOUSINGS, {(COLUMN_BUILDING_ID, BuildingId)})
+        End Get
+    End Property
+
+    Public ReadOnly Property Housings As IEnumerable(Of IHousing) Implements IBuilding.Housings
+        Get
+            Return store.GetList(Of Integer)(
+                    TABLE_HOUSINGS,
+                    {
+                        COLUMN_HOUSING_ID
+                    },
+                    {
+                        (COLUMN_BUILDING_ID, BuildingId)
+                    },
+                    COLUMN_HOUSING_ID,
+                    Function(x) x.GetInt32(0)).
+                Select(Function(x) New Housing(store, x))
+        End Get
+    End Property
+
     Public Function CreateHousing() As IHousing Implements IBuilding.CreateHousing
         Return New Housing(store, CInt(store.Create(TABLE_HOUSINGS, {(COLUMN_BUILDING_ID, BuildingId)}, COLUMN_HOUSING_ID)))
     End Function
