@@ -20,7 +20,10 @@ Friend Class Faction
                 (COLUMN_FACTION_ID, FactionId)))
         End Get
         Set(value As String)
-            Throw New NotImplementedException()
+            store.PutColumnValue(
+                TABLE_FACTIONS,
+                (COLUMN_FACTION_NAME, value),
+                (COLUMN_FACTION_ID, FactionId))
         End Set
     End Property
 
@@ -101,6 +104,14 @@ Friend Class Faction
                 },
                 COLUMN_UNIT_ID,
                 Function(x) New Unit(store, x.GetInt32(0)))
+        End Get
+    End Property
+
+    Public ReadOnly Property Profile As IProfile Implements IFaction.Profile
+        Get
+            Return New Profile(
+                store,
+                CInt(store.GetColumnValue(TABLE_FACTIONS, COLUMN_PROFILE_ID, (COLUMN_FACTION_ID, FactionId))))
         End Get
     End Property
 

@@ -13,6 +13,7 @@ Friend Module FactionDetail
                                                                                  quit()
                                                                              End If
                                                                          End Sub))
+                                choices.Add(New Choice("Rename Faction...", Sub() FactionRename.Run(faction)))
                                 If faction.UnitCount > 0 Then
                                     choices.Add(New Choice("Units...", Sub() FactionUnitList.Run(faction)))
                                 End If
