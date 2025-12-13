@@ -13,7 +13,7 @@ Friend Module HousingDetail
                 Else
                     AnsiConsole.MarkupLine($"Unit: None")
                     If housing.Building.Faction.HasUnhousedUnits Then
-                        choices.Add(New Choice("Assign To Unit...", Sub() Return))
+                        choices.Add(New Choice("Assign To Unit...", Sub() HousingPickUnit.Run(housing)))
                     End If
                 End If
             End Sub)

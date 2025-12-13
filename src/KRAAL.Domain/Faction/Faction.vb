@@ -89,6 +89,21 @@ Friend Class Faction
         End Get
     End Property
 
+    Public ReadOnly Property UnhousedUnits As IEnumerable(Of IUnit) Implements IFaction.UnhousedUnits
+        Get
+            Return store.GetList(Of IUnit)(
+                VIEW_FACTION_UNHOUSED_UNITS,
+                {
+                    COLUMN_UNIT_ID
+                },
+                {
+                    (COLUMN_FACTION_ID, FactionId)
+                },
+                COLUMN_UNIT_ID,
+                Function(x) New Unit(store, x.GetInt32(0)))
+        End Get
+    End Property
+
     Public Sub Remove() Implements IFaction.Remove
         store.Delete(TABLE_FACTIONS, {(COLUMN_FACTION_ID, FactionId)})
     End Sub

@@ -11,4 +11,5 @@
     ReadOnly Property AllBuildings As IEnumerable(Of IBuilding)
     ReadOnly Property AvailableHousing As IEnumerable(Of IHousing)
     ReadOnly Property HasUnhousedUnits As Boolean
+    ReadOnly Property UnhousedUnits As IEnumerable(Of IUnit)
 End Interface

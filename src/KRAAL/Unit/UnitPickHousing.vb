@@ -10,7 +10,7 @@ Friend Module UnitPickHousing
         Choice.Pick($"[olive]House {unit.UniqueName} where?[/]", choices)
     End Sub
 
-    Private Function SetUnitHousing(unit As IUnit, housing As IHousing) As Action
+    Friend Function SetUnitHousing(unit As IUnit, housing As IHousing) As Action
         Return Sub()
                    unit.Housing = housing
                End Sub
