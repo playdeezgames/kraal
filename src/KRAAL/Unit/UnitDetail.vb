@@ -6,6 +6,7 @@ Friend Module UnitDetail
         Menu.Run("Go Back", Sub(choices, quit)
                                 AnsiConsole.MarkupLine($"Unit: {unit.UnitName}")
                                 AnsiConsole.MarkupLine($"Faction: {unit.Faction.FactionName}")
+                                choices.Add(New Choice("Rename Unit...", Sub() UnitRename.Run(unit)))
                                 Dim housing = unit.Housing
                                 If housing IsNot Nothing Then
                                     AnsiConsole.MarkupLine($"Housing: {unit.Housing.UniqueName}")

@@ -15,7 +15,7 @@ Friend Class Building
             Return CStr(store.GetColumnValue(TABLE_BUILDINGS, COLUMN_BUILDING_NAME, (COLUMN_BUILDING_ID, BuildingId)))
         End Get
         Set(value As String)
-            Throw New NotImplementedException()
+            store.PutColumnValue(TABLE_BUILDINGS, (COLUMN_BUILDING_NAME, value), (COLUMN_BUILDING_ID, BuildingId))
         End Set
     End Property
 

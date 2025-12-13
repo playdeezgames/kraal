@@ -25,7 +25,10 @@ Friend Class Unit
                 (COLUMN_UNIT_ID, UnitId)))
         End Get
         Set(value As String)
-            Throw New NotImplementedException()
+            store.PutColumnValue(
+                TABLE_UNITS,
+                (COLUMN_UNIT_NAME, value),
+                (COLUMN_UNIT_ID, UnitId))
         End Set
     End Property
 
