@@ -21,7 +21,7 @@ Friend Module UnitDetail
             If unit.HasHousing Then
                 choices.Add(New Choice("Unhouse", Sub() unit.Housing = Nothing))
             ElseIf unit.Faction.HasAvailableHousing Then
-                choices.Add(New Choice("House...", Sub() Return))
+                choices.Add(New Choice("House...", Sub() UnitPickHousing.Run(unit)))
             End If
             Choice.Pick("[olive]Now What?[/]", choices)
         Loop

@@ -72,6 +72,17 @@ Friend Class Faction
         End Get
     End Property
 
+    Public ReadOnly Property AvailableHousing As IEnumerable(Of IHousing) Implements IFaction.AvailableHousing
+        Get
+            Return store.GetList(Of IHousing)(
+                VIEW_FACTION_AVAILABLE_HOUSINGS,
+                {COLUMN_HOUSING_ID},
+                {(COLUMN_FACTION_ID, FactionId)},
+                COLUMN_HOUSING_ID,
+                Function(x) New Housing(store, x.GetInt32(0)))
+        End Get
+    End Property
+
     Public Sub Remove() Implements IFaction.Remove
         store.Delete(TABLE_FACTIONS, {(COLUMN_FACTION_ID, FactionId)})
     End Sub
