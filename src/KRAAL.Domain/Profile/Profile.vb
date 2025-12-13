@@ -20,7 +20,10 @@ Friend Class Profile
                 (COLUMN_PROFILE_ID, ProfileId)))
         End Get
         Set(value As String)
-            Throw New NotImplementedException()
+            store.PutColumnValue(
+                TABLE_PROFILES,
+                (COLUMN_PROFILE_NAME, value),
+                (COLUMN_PROFILE_ID, ProfileId))
         End Set
     End Property
 
@@ -42,6 +45,12 @@ Friend Class Profile
                 },
                 COLUMN_FACTION_ID,
                 Function(x) New Faction(store, x.GetInt32(0)))
+        End Get
+    End Property
+
+    Public ReadOnly Property Profiles As IProfiles Implements IProfile.Profiles
+        Get
+            Return New Profiles(store)
         End Get
     End Property
 

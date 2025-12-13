@@ -6,4 +6,5 @@
     Function DoesFactionNameExist(factionName As String) As Boolean
     Function CreateFaction(factionName As String) As IFaction
     ReadOnly Property AllFactions As IEnumerable(Of IFaction)
+    ReadOnly Property Profiles As IProfiles
 End Interface
