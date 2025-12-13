@@ -1,8 +1,8 @@
-﻿Imports KRAAL.Store
+﻿Imports KRAAL.Domain
 Imports Spectre.Console
 
 Friend Module FactionDetail
-    Friend Sub Run(dataStore As IDataStore, faction As IFactionDTO)
+    Friend Sub Run(faction As IFaction)
         Dim running As Boolean = True
         Do While running
             AnsiConsole.Clear()
@@ -13,16 +13,16 @@ Friend Module FactionDetail
                            New Choice("Go Back", Sub() running = False),
                            New Choice("Remove Faction", Sub()
                                                             If Choice.Confirm("[red]Are you sure you want to remove this faction?[/]") Then
-                                                                dataStore.Factions.Remove(faction)
+                                                                faction.Remove()
                                                                 running = False
                                                             End If
                                                         End Sub)
                        }
-            If dataStore.Units.CountForFaction(faction) > 0 Then
-                choices.Add(New Choice("Units...", Sub() FactionUnitList.Run(dataStore, faction)))
+            If faction.UnitCount > 0 Then
+                choices.Add(New Choice("Units...", Sub() FactionUnitList.Run(faction)))
             End If
-            If dataStore.Buildings.CountForFaction(faction) > 0 Then
-                choices.Add(New Choice("Buildings...", Sub() FactionBuildingList.Run(dataStore, faction)))
+            If faction.BuildingCount > 0 Then
+                choices.Add(New Choice("Buildings...", Sub() FactionBuildingList.Run(faction)))
             End If
             Choice.Pick("[olive]Now What?[/]", choices)
         Loop

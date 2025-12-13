@@ -1,25 +1,25 @@
-﻿Imports KRAAL.Store
+﻿Imports KRAAL.Domain
+Imports KRAAL.Store
 Imports Spectre.Console
 
 Friend Module UnitDetail
-    Friend Sub Run(dataStore As IDataStore, unit As IUnitDTO)
+    Friend Sub Run(unit As IUnit)
         Dim running = True
         Do While running
             AnsiConsole.Clear()
-            Dim details = dataStore.Units.GetDetail(unit)
-            AnsiConsole.MarkupLine($"Unit: {details.UnitName}")
-            If details.HousingId.HasValue Then
-                AnsiConsole.MarkupLine($"Building: {details.HousingBuildingName}")
+            AnsiConsole.MarkupLine($"Unit: {unit.UnitName}")
+            If unit.HasHousing Then
+                AnsiConsole.MarkupLine($"Building: {unit.Housing.Building.BuildingName}")
             Else
                 AnsiConsole.MarkupLine($"Building: None")
             End If
-            AnsiConsole.MarkupLine($"Faction: {details.FactionName}")
+            AnsiConsole.MarkupLine($"Faction: {unit.Faction.FactionName}")
             Dim choices As New List(Of Choice) From
                 {
                     New Choice("Go Back", Sub() running = False)
                 }
-            If details.HousingId.HasValue Then
-                choices.Add(New Choice("Unhouse", Sub() dataStore.Units.SetHousing(unit, Nothing)))
+            If unit.HasHousing Then
+                choices.Add(New Choice("Unhouse", Sub() unit.Housing = Nothing))
             End If
             Choice.Pick("[olive]Now What?[/]", choices)
         Loop

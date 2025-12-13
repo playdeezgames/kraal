@@ -1,3 +1,4 @@
+Imports KRAAL.Domain
 Imports KRAAL.Store
 
 Module Program
@@ -5,7 +6,7 @@ Module Program
     Sub Main(args As String())
         Dim store As IDataStore = New DataStore()
         store.Open(CONNECTION_STRING)
-        ProfileList.Run(store)
+        ProfileList.Run(New Profiles(store))
         store.Close()
     End Sub
 End Module

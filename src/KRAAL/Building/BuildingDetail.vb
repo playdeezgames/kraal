@@ -1,8 +1,8 @@
-﻿Imports KRAAL.Store
+﻿Imports KRAAL.Domain
 Imports Spectre.Console
 
 Friend Module BuildingDetail
-    Friend Sub Run(dataStore As IDataStore, building As IBuildingDTO)
+    Friend Sub Run(building As IBuilding)
         Dim running = True
         Do While running
             AnsiConsole.Clear()
