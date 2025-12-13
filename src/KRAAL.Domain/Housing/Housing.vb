@@ -21,4 +21,14 @@ Friend Class Housing
             Return $"{Building.BuildingName}(#{Building.BuildingId}-{HousingId})"
         End Get
     End Property
+
+    Public ReadOnly Property Unit As IUnit Implements IHousing.Unit
+        Get
+            Dim unitId = store.GetColumnValue(TABLE_UNITS, COLUMN_UNIT_ID, (COLUMN_HOUSING_ID, HousingId))
+            If unitId Is Nothing Then
+                Return Nothing
+            End If
+            Return New Unit(store, CInt(unitId))
+        End Get
+    End Property
 End Class

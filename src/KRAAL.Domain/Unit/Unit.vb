@@ -41,20 +41,20 @@ Friend Class Unit
 
     Public ReadOnly Property HasHousing As Boolean Implements IUnit.HasHousing
         Get
-            Return store.GetColumnValue(TABLE_UNITS, COLUMN_HOUSING_ID, (COLUMN_UNIT_ID, UnitId)) IsNot DBNull.Value
+            Return store.GetColumnValue(TABLE_UNITS, COLUMN_HOUSING_ID, (COLUMN_UNIT_ID, UnitId)) IsNot Nothing
         End Get
     End Property
 
     Public Property Housing As IHousing Implements IUnit.Housing
         Get
             Dim housingId = store.GetColumnValue(TABLE_UNITS, COLUMN_HOUSING_ID, (COLUMN_UNIT_ID, UnitId))
-            If housingId Is DBNull.Value Then
+            If housingId Is Nothing Then
                 Return Nothing
             End If
             Return New Housing(store, CInt(housingId))
         End Get
         Set(value As IHousing)
-            store.PutColumnValue(TABLE_UNITS, (COLUMN_HOUSING_ID, If(value IsNot Nothing, CObj(value.HousingId), DBNull.Value)), (COLUMN_UNIT_ID, UnitId))
+            store.PutColumnValue(TABLE_UNITS, (COLUMN_HOUSING_ID, value?.HousingId), (COLUMN_UNIT_ID, UnitId))
         End Set
     End Property
 End Class

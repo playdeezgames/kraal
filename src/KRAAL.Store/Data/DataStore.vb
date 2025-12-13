@@ -46,7 +46,7 @@ ORDER BY
                             filters As IEnumerable(Of (Column As String, Value As Object)),
                             command As MySqlCommand, prefix As String)
         For Each f In filters
-            command.Parameters.AddWithValue($"@{prefix}{f.Column}", f.Value)
+            command.Parameters.AddWithValue($"@{prefix}{f.Column}", If(f.Value, DBNull.Value))
         Next
     End Sub
 
@@ -74,7 +74,11 @@ WHERE
     {String.Join(" AND ", filters.Select(Function(x) $"{x.Column} = @{x.Column}"))}
 ", String.Empty)};", connection)
             ApplyFilters(filters, command, "")
-            Return command.ExecuteScalar
+            Dim result = command.ExecuteScalar
+            If result Is DBNull.Value Then
+                result = Nothing
+            End If
+            Return result
         End Using
     End Function
 

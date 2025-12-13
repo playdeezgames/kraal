@@ -10,4 +10,5 @@
     ReadOnly Property UnitCount As Integer
     ReadOnly Property AllBuildings As IEnumerable(Of IBuilding)
     ReadOnly Property AvailableHousing As IEnumerable(Of IHousing)
+    ReadOnly Property HasUnhousedUnits As Boolean
 End Interface

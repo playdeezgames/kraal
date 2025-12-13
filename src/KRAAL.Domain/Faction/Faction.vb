@@ -83,6 +83,12 @@ Friend Class Faction
         End Get
     End Property
 
+    Public ReadOnly Property HasUnhousedUnits As Boolean Implements IFaction.HasUnhousedUnits
+        Get
+            Return store.GetCount(VIEW_FACTION_UNHOUSED_UNITS, {(COLUMN_FACTION_ID, FactionId)}) > 0
+        End Get
+    End Property
+
     Public Sub Remove() Implements IFaction.Remove
         store.Delete(TABLE_FACTIONS, {(COLUMN_FACTION_ID, FactionId)})
     End Sub
@@ -94,7 +100,7 @@ Friend Class Faction
                 TABLE_UNITS,
                 {
                     (COLUMN_UNIT_NAME, unitName),
-                    (COLUMN_HOUSING_ID, If(housing IsNot Nothing, CObj(housing.HousingId), DBNull.Value)),
+                    (COLUMN_HOUSING_ID, housing?.HousingId),
                     (COLUMN_FACTION_ID, FactionId)
                 },
                 COLUMN_UNIT_ID)))

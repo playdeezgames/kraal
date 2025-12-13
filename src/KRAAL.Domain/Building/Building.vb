@@ -41,6 +41,17 @@ Friend Class Building
         End Get
     End Property
 
+    Public ReadOnly Property Faction As IFaction Implements IBuilding.Faction
+        Get
+            Return New Faction(
+                store,
+                CInt(store.GetColumnValue(
+                    TABLE_BUILDINGS,
+                    COLUMN_FACTION_ID,
+                    (COLUMN_BUILDING_ID, BuildingId))))
+        End Get
+    End Property
+
     Public Function CreateHousing() As IHousing Implements IBuilding.CreateHousing
         Return New Housing(store, CInt(store.Create(TABLE_HOUSINGS, {(COLUMN_BUILDING_ID, BuildingId)}, COLUMN_HOUSING_ID)))
     End Function

@@ -5,4 +5,5 @@
     Friend Const TABLE_BUILDINGS = "buildings"
     Friend Const TABLE_HOUSINGS = "housings"
     Friend Const VIEW_FACTION_AVAILABLE_HOUSINGS = "faction_available_housings"
+    Friend Const VIEW_FACTION_UNHOUSED_UNITS = "faction_unhoused_units"
 End Module
