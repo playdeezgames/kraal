@@ -10,6 +10,7 @@ Friend Module HousingDetail
                 Dim unit = housing.Unit
                 If unit IsNot Nothing Then
                     AnsiConsole.MarkupLine($"Unit: {unit.UniqueName}")
+                    choices.Add(New Choice("Unit...", Sub() UnitDetail.Run(unit)))
                 Else
                     AnsiConsole.MarkupLine($"Unit: None")
                     If housing.Building.Faction.HasUnhousedUnits Then

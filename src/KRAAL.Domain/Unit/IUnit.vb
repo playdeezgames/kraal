@@ -3,6 +3,5 @@
     Property UnitName As String
     ReadOnly Property UnitId As Integer
     ReadOnly Property Faction As IFaction
-    ReadOnly Property HasHousing As Boolean
     Property Housing As IHousing
 End Interface

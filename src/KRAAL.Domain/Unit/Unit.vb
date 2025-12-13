@@ -39,12 +39,6 @@ Friend Class Unit
         End Get
     End Property
 
-    Public ReadOnly Property HasHousing As Boolean Implements IUnit.HasHousing
-        Get
-            Return store.GetColumnValue(TABLE_UNITS, COLUMN_HOUSING_ID, (COLUMN_UNIT_ID, UnitId)) IsNot Nothing
-        End Get
-    End Property
-
     Public Property Housing As IHousing Implements IUnit.Housing
         Get
             Dim housingId = store.GetColumnValue(TABLE_UNITS, COLUMN_HOUSING_ID, (COLUMN_UNIT_ID, UnitId))
