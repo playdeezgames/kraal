@@ -10,18 +10,12 @@ Friend Module ProfileDetail
                                 AnsiConsole.MarkupLine($"Factions: {factionCount}")
                                 choices.AddRange(
                                    {
-                                       New Choice("(new faction)", Sub() FactionAdd.Run(profile)),
-                                       New Choice("Remove Profile", Sub()
-                                                                        If Choice.Confirm("[red]Are you sure you want to remove this profile?[/]") Then
-                                                                            profile.Remove()
-                                                                            quit()
-                                                                        End If
-                                                                    End Sub),
-                                        New Choice("Rename Profile...", Sub() ProfileRename.Run(profile))
+                                       New Choice("(new faction)", Sub() FactionAdd.Run(profile))
                                    })
                                 For Each faction In profile.AllFactions
                                     choices.Add(New Choice($"Faction: {faction.FactionName}", Sub() FactionDetail.Run(faction)))
                                 Next
+                                choices.Add(New Choice("Profile Admin...", Sub() ProfileAdmin.Run(profile, quit)))
                             End Sub)
     End Sub
 End Module
