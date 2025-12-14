@@ -8,13 +8,10 @@ Friend Module ProfileDetail
                                 AnsiConsole.MarkupLine($"Profile Name: {profile.ProfileName}")
                                 Dim factionCount = profile.FactionCount
                                 AnsiConsole.MarkupLine($"Factions: {factionCount}")
-                                choices.AddRange(
-                                   {
-                                       New Choice("(new faction)", Sub() FactionAdd.Run(profile))
-                                   })
                                 For Each faction In profile.AllFactions
                                     choices.Add(New Choice($"Faction: {faction.FactionName}", Sub() FactionDetail.Run(faction)))
                                 Next
+                                choices.Add(New Choice("(new faction)", Sub() FactionAdd.Run(profile)))
                                 choices.Add(New Choice("Profile Admin...", Sub() ProfileAdmin.Run(profile, quit)))
                             End Sub)
     End Sub

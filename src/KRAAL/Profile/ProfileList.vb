@@ -7,10 +7,8 @@ Friend Module ProfileList
             "Quit",
             Sub(choices, quit)
                 Dim allProfiles = profiles.All
-                choices.Add(
-                                    New Choice("(new profile)", Sub() ProfileAdd.Run(profiles))
-                                )
                 choices.AddRange(allProfiles.Select(Function(x) New Choice(x.ProfileName, Sub() ProfileDetail.Run(x))))
+                choices.Add(New Choice("(new profile)", Sub() ProfileAdd.Run(profiles)))
             End Sub)
     End Sub
 End Module
