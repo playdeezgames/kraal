@@ -8,4 +8,6 @@
     Friend Const COLUMN_BUILDING_ID = "building_id"
     Friend Const COLUMN_BUILDING_NAME = "building_name"
     Friend Const COLUMN_HOUSING_ID = "housing_id"
+    Friend Const COLUMN_COUNTER_TYPE_ID = "counter_type_id"
+    Friend Const COLUMN_COUNTER_TYPE_NAME = "counter_type_name"
 End Module
