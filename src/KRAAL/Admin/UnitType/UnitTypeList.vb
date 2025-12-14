@@ -2,9 +2,10 @@
 Imports Spectre.Console
 
 Friend Module UnitTypeList
-    Friend Sub Run(profiles As IProfiles)
+    Friend Sub Run(unitTypes As IUnitTypes)
         Menu.Run("Go Back", Sub(choices, quit)
                                 AnsiConsole.MarkupLine("Unit Types:")
+                                choices.Add(New Choice("(add unit type)", Sub() UnitTypeAdd.Run(unitTypes)))
                             End Sub)
     End Sub
 End Module

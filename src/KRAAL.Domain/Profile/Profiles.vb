@@ -22,6 +22,18 @@ Public Class Profiles
         End Get
     End Property
 
+    Public ReadOnly Property CounterTypes As ICounterTypes Implements IProfiles.CounterTypes
+        Get
+            Return New CounterTypes(store)
+        End Get
+    End Property
+
+    Public ReadOnly Property UnitTypes As IUnitTypes Implements IProfiles.UnitTypes
+        Get
+            Return New UnitTypes(store)
+        End Get
+    End Property
+
     Public Function DoesProfileNameExist(profileName As String) As Boolean Implements IProfiles.DoesProfileNameExist
         Return store.GetCount(TABLE_PROFILES, {(COLUMN_PROFILE_NAME, profileName)}) > 0
     End Function
