@@ -32,4 +32,10 @@ Friend Class UnitType
             Return New UnitTypes(store)
         End Get
     End Property
+
+    Public ReadOnly Property Counters As IUnitTypeCounters Implements IUnitType.Counters
+        Get
+            Return New UnitTypeCounters(store, UnitTypeId)
+        End Get
+    End Property
 End Class

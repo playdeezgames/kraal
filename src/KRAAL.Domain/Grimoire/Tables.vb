@@ -8,4 +8,5 @@
     Friend Const VIEW_FACTION_UNHOUSED_UNITS = "faction_unhoused_units"
     Friend Const TABLE_COUNTER_TYPES = "counter_types"
     Friend Const TABLE_UNIT_TYPES = "unit_types"
+    Friend Const TABLE_UNIT_TYPE_COUNTERS = "unit_type_counters"
 End Module

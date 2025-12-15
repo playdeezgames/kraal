@@ -3,4 +3,5 @@
     Property UnitTypeName As String
     ReadOnly Property UnitTypes As IUnitTypes
     Sub Remove()
+    ReadOnly Property Counters As IUnitTypeCounters
 End Interface
