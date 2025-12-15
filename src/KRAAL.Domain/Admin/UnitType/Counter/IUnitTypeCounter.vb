@@ -1,7 +1,8 @@
 ﻿Public Interface IUnitTypeCounter
     ReadOnly Property CounterType As ICounterType
     ReadOnly Property UnitType As IUnitType
-    ReadOnly Property InitialValue As Integer
-    ReadOnly Property MinimumValue As Integer
-    ReadOnly Property MaximumValue As Integer
+    Property InitialValue As Integer
+    Property MinimumValue As Integer
+    Property MaximumValue As Integer
+    Sub Remove()
 End Interface
