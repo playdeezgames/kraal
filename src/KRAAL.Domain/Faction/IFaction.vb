@@ -2,7 +2,7 @@
     ReadOnly Property FactionId As Integer
     Property FactionName As String
     Sub Remove()
-    Function CreateUnit(unitName As String, housing As IHousing) As IUnit
+    Function CreateUnit(unitName As String, unitType As IUnitType, housing As IHousing) As IUnit
     Function CreateBuilding(buildingName As String) As IBuilding
     ReadOnly Property HasAvailableHousing As Boolean
     ReadOnly Property AllUnits As IEnumerable(Of IUnit)

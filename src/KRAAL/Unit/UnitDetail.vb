@@ -5,6 +5,7 @@ Friend Module UnitDetail
     Friend Sub Run(unit As IUnit)
         Menu.Run("Go Back", Sub(choices, quit)
                                 AnsiConsole.MarkupLine($"Unit: {unit.UnitName}")
+                                AnsiConsole.MarkupLine($"Unit Type: {unit.UnitType.UnitTypeName}")
                                 AnsiConsole.MarkupLine($"Faction: {unit.Faction.FactionName}")
                                 choices.Add(New Choice("Rename Unit...", Sub() UnitRename.Run(unit)))
                                 Dim housing = unit.Housing

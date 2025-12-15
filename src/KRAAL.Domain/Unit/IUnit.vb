@@ -4,4 +4,5 @@
     ReadOnly Property UnitId As Integer
     ReadOnly Property Faction As IFaction
     Property Housing As IHousing
+    ReadOnly Property UnitType As IUnitType
 End Interface

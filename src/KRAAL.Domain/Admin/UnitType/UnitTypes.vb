@@ -29,4 +29,14 @@ Friend Class UnitTypes
     Public Function Create(name As String) As IUnitType Implements IUnitTypes.Create
         Return New UnitType(store, CInt(store.Create(TABLE_UNIT_TYPES, {(COLUMN_UNIT_TYPE_NAME, name)}, COLUMN_UNIT_TYPE_ID)))
     End Function
+
+    Public Function FindByName(unitTypeName As String) As IUnitType Implements IUnitTypes.FindByName
+        Return store.GetList(Of IUnitType)(
+            TABLE_UNIT_TYPES,
+            {COLUMN_UNIT_TYPE_ID},
+            {(COLUMN_UNIT_TYPE_NAME, unitTypeName)},
+            COLUMN_UNIT_TYPE_ID,
+            Function(x) New UnitType(store, x.GetInt32(0))
+            ).SingleOrDefault()
+    End Function
 End Class

@@ -1,8 +1,8 @@
 ﻿Imports KRAAL.Domain
-Imports KRAAL.Store
 Imports Spectre.Console
 
 Friend Module FactionAdd
+    Private Const PEASANT As String = "peasant"
     ReadOnly unitNames As String() = {"Moe", "Larry", "Curly"}
     Friend Sub Run(profile As IProfile)
         Dim factionName = AnsiConsole.Ask("[olive]Faction Name:[/]", String.Empty)
@@ -18,9 +18,10 @@ Friend Module FactionAdd
         Dim housings = Enumerable.
             Range(0, 5).
             Select(Function(x) building.CreateHousing()).ToList
+        Dim unitType = profile.Profiles.UnitTypes.FindByName(PEASANT)
         For Each unitName In unitNames
             Dim housing = housings.FirstOrDefault
-            faction.CreateUnit(unitName, housing)
+            faction.CreateUnit(unitName, UnitType, housing)
             If housing IsNot Nothing Then
                 housings.Remove(housing)
             End If

@@ -119,13 +119,14 @@ Friend Class Faction
         store.Delete(TABLE_FACTIONS, {(COLUMN_FACTION_ID, FactionId)})
     End Sub
 
-    Public Function CreateUnit(unitName As String, housing As IHousing) As IUnit Implements IFaction.CreateUnit
+    Public Function CreateUnit(unitName As String, unitType As IUnitType, housing As IHousing) As IUnit Implements IFaction.CreateUnit
         Return New Unit(
             store,
             CInt(store.Create(
                 TABLE_UNITS,
                 {
                     (COLUMN_UNIT_NAME, unitName),
+                    (COLUMN_UNIT_TYPE_ID, unitType.UnitTypeId),
                     (COLUMN_HOUSING_ID, housing?.HousingId),
                     (COLUMN_FACTION_ID, FactionId)
                 },

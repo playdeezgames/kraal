@@ -1,5 +1,4 @@
-﻿Imports System.Xml
-Imports KRAAL.Store
+﻿Imports KRAAL.Store
 
 Friend Class Unit
     Implements IUnit
@@ -53,5 +52,13 @@ Friend Class Unit
         Set(value As IHousing)
             store.PutColumnValue(TABLE_UNITS, (COLUMN_HOUSING_ID, value?.HousingId), (COLUMN_UNIT_ID, UnitId))
         End Set
+    End Property
+
+    Public ReadOnly Property UnitType As IUnitType Implements IUnit.UnitType
+        Get
+            Return New UnitType(
+                store,
+                CInt(store.GetColumnValue(TABLE_UNITS, COLUMN_UNIT_TYPE_ID, (COLUMN_UNIT_ID, UnitId))))
+        End Get
     End Property
 End Class
