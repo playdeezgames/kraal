@@ -13,4 +13,7 @@
     Friend Const COLUMN_UNIT_TYPE_ID = "unit_type_id"
     Friend Const COLUMN_UNIT_TYPE_NAME = "unit_type_name"
     Friend Const COLUMN_UNIT_TYPE_COUNTER_ID = "unit_type_counter_id"
+    Friend Const COLUMN_INITIAL_VALUE = "initial_value"
+    Friend Const COLUMN_MINIMUM_VALUE = "minimum_value"
+    Friend Const COLUMN_MAXIMUM_VALUE = "maximum_value"
 End Module
