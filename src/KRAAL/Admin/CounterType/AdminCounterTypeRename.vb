@@ -1,7 +1,7 @@
 ﻿Imports KRAAL.Domain
 Imports Spectre.Console
 
-Friend Module CounterTypeRename
+Friend Module AdminCounterTypeRename
     Friend Sub Run(counterType As ICounterType)
         Dim name = AnsiConsole.Ask("[olive]New Name:[/]", counterType.CounterTypeName)
         If counterType.CounterTypes.DoesNameExist(name) Then

@@ -1,6 +1,6 @@
 ﻿Imports KRAAL.Domain
 
-Friend Module CounterTypeRemove
+Friend Module AdminCounterTypeRemove
     Friend Sub Run(counterType As ICounterType, quitParent As Action)
         If Choice.Confirm($"[red]Are you sure you want to remove counter type {counterType.CounterTypeName}?[/]") Then
             counterType.Remove()

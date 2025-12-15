@@ -1,7 +1,7 @@
 ﻿Imports KRAAL.Domain
 Imports Spectre.Console
 
-Friend Module CounterTypeAdd
+Friend Module AdminCounterTypeAdd
     Friend Sub Run(counterTypes As ICounterTypes)
         Dim name = AnsiConsole.Ask("[olive]New Counter Type Name:[/]", String.Empty)
         If String.IsNullOrWhiteSpace(name) Then
@@ -11,6 +11,6 @@ Friend Module CounterTypeAdd
             Choice.Pause("[red]That Counter Type name already exists![/]")
             Return
         End If
-        CounterTypeDetail.Run(counterTypes.Create(name))
+        AdminCounterTypeDetail.Run(counterTypes.Create(name))
     End Sub
 End Module
