@@ -16,4 +16,6 @@
     Friend Const COLUMN_INITIAL_VALUE = "initial_value"
     Friend Const COLUMN_MINIMUM_VALUE = "minimum_value"
     Friend Const COLUMN_MAXIMUM_VALUE = "maximum_value"
+    Friend Const COLUMN_CURRENT_VALUE = "current_value"
+    Friend Const COLUMN_UNIT_COUNTER_ID = "unit_counter_id"
 End Module

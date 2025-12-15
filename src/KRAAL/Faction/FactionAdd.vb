@@ -19,9 +19,13 @@ Friend Module FactionAdd
             Range(0, 5).
             Select(Function(x) building.CreateHousing()).ToList
         Dim unitType = profile.Profiles.UnitTypes.FindByName(PEASANT)
+        Dim unitTypeCounters = unitType.Counters.All
         For Each unitName In unitNames
             Dim housing = housings.FirstOrDefault
-            faction.CreateUnit(unitName, UnitType, housing)
+            Dim unit = faction.CreateUnit(unitName, unitType, housing)
+            For Each counter In unitTypeCounters
+                unit.Counters.Create(counter.CounterType, counter.InitialValue)
+            Next
             If housing IsNot Nothing Then
                 housings.Remove(housing)
             End If

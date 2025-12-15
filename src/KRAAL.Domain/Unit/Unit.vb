@@ -61,4 +61,10 @@ Friend Class Unit
                 CInt(store.GetColumnValue(TABLE_UNITS, COLUMN_UNIT_TYPE_ID, (COLUMN_UNIT_ID, UnitId))))
         End Get
     End Property
+
+    Public ReadOnly Property Counters As IUnitCounters Implements IUnit.Counters
+        Get
+            Return New UnitCounters(store, UnitId)
+        End Get
+    End Property
 End Class
