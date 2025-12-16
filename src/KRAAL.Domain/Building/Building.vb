@@ -12,16 +12,26 @@ Friend Class Building
 
     Public Property BuildingName As String Implements IBuilding.BuildingName
         Get
-            Return CStr(store.GetColumnValue(TABLE_BUILDINGS, COLUMN_BUILDING_NAME, (COLUMN_BUILDING_ID, BuildingId)))
+            Return CStr(store.GetColumnValue(
+                TABLE_BUILDINGS,
+                COLUMN_BUILDING_NAME,
+                (COLUMN_BUILDING_ID, BuildingId)))
         End Get
         Set(value As String)
-            store.PutColumnValue(TABLE_BUILDINGS, (COLUMN_BUILDING_NAME, value), (COLUMN_BUILDING_ID, BuildingId))
+            store.PutColumnValue(
+                TABLE_BUILDINGS,
+                (COLUMN_BUILDING_NAME, value),
+                (COLUMN_BUILDING_ID, BuildingId))
         End Set
     End Property
 
     Public ReadOnly Property HousingCount As Integer Implements IBuilding.HousingCount
         Get
-            Return store.GetCount(TABLE_HOUSINGS, {(COLUMN_BUILDING_ID, BuildingId)})
+            Return store.GetCount(
+                TABLE_HOUSINGS,
+                {
+                    (COLUMN_BUILDING_ID, BuildingId)
+                })
         End Get
     End Property
 
@@ -52,8 +62,26 @@ Friend Class Building
         End Get
     End Property
 
+    Public ReadOnly Property BuildingType As IBuildingType Implements IBuilding.BuildingType
+        Get
+            Return New BuildingType(
+                store,
+                CInt(store.GetColumnValue(
+                    TABLE_BUILDINGS,
+                    COLUMN_BUILDING_TYPE_ID,
+                    (COLUMN_BUILDING_ID, BuildingId))))
+        End Get
+    End Property
+
     Public Function CreateHousing() As IHousing Implements IBuilding.CreateHousing
-        Return New Housing(store, CInt(store.Create(TABLE_HOUSINGS, {(COLUMN_BUILDING_ID, BuildingId)}, COLUMN_HOUSING_ID)))
+        Return New Housing(
+            store,
+            CInt(store.Create(
+                TABLE_HOUSINGS,
+                {
+                    (COLUMN_BUILDING_ID, BuildingId)
+                },
+                COLUMN_HOUSING_ID)))
     End Function
 
     Public Function UniqueName() As String Implements IBuilding.UniqueName

@@ -18,4 +18,6 @@
     Friend Const COLUMN_MAXIMUM_VALUE = "maximum_value"
     Friend Const COLUMN_CURRENT_VALUE = "current_value"
     Friend Const COLUMN_UNIT_COUNTER_ID = "unit_counter_id"
+    Friend Const COLUMN_BUILDING_TYPE_ID = "building_type_id"
+    Friend Const COLUMN_BUILDING_TYPE_NAME = "building_type_name"
 End Module

@@ -139,12 +139,13 @@ Friend Class Faction
                 COLUMN_UNIT_ID)))
     End Function
 
-    Public Function CreateBuilding(buildingName As String) As IBuilding Implements IFaction.CreateBuilding
+    Public Function CreateBuilding(buildingType As IBuildingType, buildingName As String) As IBuilding Implements IFaction.CreateBuilding
         Return New Building(
             store,
             CInt(store.Create(
                 TABLE_BUILDINGS,
                 {
+                    (COLUMN_BUILDING_TYPE_ID, buildingType.BuildingTypeId),
                     (COLUMN_BUILDING_NAME, buildingName),
                     (COLUMN_FACTION_ID, FactionId)
                 },

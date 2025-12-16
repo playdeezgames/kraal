@@ -6,4 +6,5 @@
     ReadOnly Property HousingCount As Integer
     ReadOnly Property Housings As IEnumerable(Of IHousing)
     ReadOnly Property Faction As IFaction
+    ReadOnly Property BuildingType As IBuildingType
 End Interface

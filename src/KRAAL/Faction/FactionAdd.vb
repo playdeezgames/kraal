@@ -13,7 +13,8 @@ Friend Module FactionAdd
             Return
         End If
         Dim faction = profile.CreateFaction(factionName)
-        Dim building = faction.CreateBuilding("Dormitory")
+        Dim buildingType = profile.Profiles.BuildingTypes.FindByName(BUILDINGTYPE_DORMITORY)
+        Dim building = faction.CreateBuilding(buildingType, "Dormitory")
         Dim housings = Enumerable.
             Range(0, 5).
             Select(Function(x) building.CreateHousing()).ToList
