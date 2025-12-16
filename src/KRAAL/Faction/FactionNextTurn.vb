@@ -5,5 +5,6 @@ Friend Module FactionNextTurn
         For Each unit In faction.AllUnits
             UnitNextTurn.Run(unit)
         Next
+        Choice.Pause("[olive]Onward...[/]")
     End Sub
 End Module

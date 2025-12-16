@@ -34,7 +34,12 @@ Friend Class UnitCounter
 
     Public ReadOnly Property UnitTypeCounter As IUnitTypeCounter Implements IUnitCounter.UnitTypeCounter
         Get
-            Throw New NotImplementedException
+            Return New UnitTypeCounter(
+                store,
+                CInt(store.GetColumnValue(
+                    VIEW_UNIT_COUNTER_DETAILS,
+                    COLUMN_UNIT_TYPE_COUNTER_ID,
+                    (COLUMN_UNIT_COUNTER_ID, unitCounterId))))
         End Get
     End Property
 End Class
