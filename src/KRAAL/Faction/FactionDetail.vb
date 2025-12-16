@@ -6,6 +6,9 @@ Friend Module FactionDetail
         Menu.Run("Go Back", Sub(choices, quit)
                                 AnsiConsole.MarkupLine($"Faction Id: {faction.FactionId}")
                                 AnsiConsole.MarkupLine($"Faction Name: {faction.FactionName}")
+                                If faction.HasUnits Then
+                                    choices.Add(New Choice("Next Turn", Sub() FactionNextTurn.Run(faction)))
+                                End If
                                 If faction.UnitCount > 0 Then
                                     choices.Add(New Choice("Units...", Sub() FactionUnitList.Run(faction)))
                                 End If

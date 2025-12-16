@@ -115,6 +115,12 @@ Friend Class Faction
         End Get
     End Property
 
+    Public ReadOnly Property HasUnits As Boolean Implements IFaction.HasUnits
+        Get
+            Return store.GetCount(TABLE_UNITS, {(COLUMN_FACTION_ID, FactionId)}) > 0
+        End Get
+    End Property
+
     Public Sub Remove() Implements IFaction.Remove
         store.Delete(TABLE_FACTIONS, {(COLUMN_FACTION_ID, FactionId)})
     End Sub

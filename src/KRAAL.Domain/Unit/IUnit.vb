@@ -6,4 +6,5 @@
     Property Housing As IHousing
     ReadOnly Property UnitType As IUnitType
     ReadOnly Property Counters As IUnitCounters
+    Sub Remove()
 End Interface

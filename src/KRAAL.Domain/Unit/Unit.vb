@@ -67,4 +67,8 @@ Friend Class Unit
             Return New UnitCounters(store, UnitId)
         End Get
     End Property
+
+    Public Sub Remove() Implements IUnit.Remove
+        store.Delete(TABLE_UNITS, {(COLUMN_UNIT_ID, UnitId)})
+    End Sub
 End Class

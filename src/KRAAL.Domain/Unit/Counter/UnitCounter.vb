@@ -23,9 +23,18 @@ Friend Class UnitCounter
         End Get
     End Property
 
-    Public ReadOnly Property CurrentValue As Integer Implements IUnitCounter.CurrentValue
+    Public Property CurrentValue As Integer Implements IUnitCounter.CurrentValue
         Get
             Return CInt(store.GetColumnValue(TABLE_UNIT_COUNTERS, COLUMN_CURRENT_VALUE, (COLUMN_UNIT_COUNTER_ID, unitCounterId)))
+        End Get
+        Set(value As Integer)
+            store.PutColumnValue(TABLE_UNIT_COUNTERS, (COLUMN_CURRENT_VALUE, value), (COLUMN_UNIT_COUNTER_ID, unitCounterId))
+        End Set
+    End Property
+
+    Public ReadOnly Property UnitTypeCounter As IUnitTypeCounter Implements IUnitCounter.UnitTypeCounter
+        Get
+            Throw New NotImplementedException
         End Get
     End Property
 End Class

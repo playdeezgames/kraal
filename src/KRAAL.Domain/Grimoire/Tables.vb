@@ -11,4 +11,5 @@
     Friend Const TABLE_UNIT_TYPE_COUNTERS = "unit_type_counters"
     Friend Const VIEW_UNIT_TYPE_AVAILABLE_COUNTER_TYPES = "unit_type_available_counter_types"
     Friend Const TABLE_UNIT_COUNTERS = "unit_counters"
+    Friend Const VIEW_UNIT_COUNTER_DETAILS = "unit_counter_details"
 End Module

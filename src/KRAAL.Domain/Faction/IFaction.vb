@@ -13,4 +13,5 @@
     ReadOnly Property HasUnhousedUnits As Boolean
     ReadOnly Property UnhousedUnits As IEnumerable(Of IUnit)
     ReadOnly Property Profile As IProfile
+    ReadOnly Property HasUnits As Boolean
 End Interface

@@ -28,14 +28,38 @@ Friend Class UnitCounters
         End Get
     End Property
 
+    Public ReadOnly Property UnitTypeCounter As IUnitTypeCounter Implements IUnitCounters.UnitTypeCounter
+        Get
+            Throw New NotImplementedException()
+        End Get
+    End Property
+
+    Public Property CurrentValue As Integer Implements IUnitCounters.CurrentValue
+        Get
+            Throw New NotImplementedException()
+        End Get
+        Set(value As Integer)
+            Throw New NotImplementedException()
+        End Set
+    End Property
+
     Public Function Create(counterType As ICounterType, initialValue As Integer) As IUnitCounter Implements IUnitCounters.Create
         Return New UnitCounter(store, CInt(store.Create(
             TABLE_UNIT_COUNTERS,
             {
                 (COLUMN_UNIT_ID, unitId),
                 (COLUMN_COUNTER_TYPE_ID, counterType.CounterTypeId),
-                (COLUMN_CURRENT_VALUE, initialValue)
+                (COLUMN_CURRENT_VALUE, initialValue),
+                (COLUMN_UNIT_TYPE_ID, Unit.UnitType.UnitTypeId)
             },
             COLUMN_UNIT_COUNTER_ID)))
+    End Function
+
+    Public Function FindByName(name As String) As IUnitCounter Implements IUnitCounters.FindByName
+        Return store.GetList(Of IUnitCounter)(
+            VIEW_UNIT_COUNTER_DETAILS,
+            {COLUMN_UNIT_COUNTER_ID},
+            {(COLUMN_UNIT_ID, unitId), (COLUMN_COUNTER_TYPE_NAME, name)},
+            COLUMN_UNIT_COUNTER_ID, Function(x) New UnitCounter(store, x.GetInt32(0))).SingleOrDefault()
     End Function
 End Class
