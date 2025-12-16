@@ -7,4 +7,5 @@
     ReadOnly Property UnitType As IUnitType
     ReadOnly Property Counters As IUnitCounters
     Sub Remove()
+    ReadOnly Property Exists As Boolean
 End Interface

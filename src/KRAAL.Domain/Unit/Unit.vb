@@ -68,6 +68,12 @@ Friend Class Unit
         End Get
     End Property
 
+    Public ReadOnly Property Exists As Boolean Implements IUnit.Exists
+        Get
+            Return store.GetCount(TABLE_UNITS, {(COLUMN_UNIT_ID, UnitId)}) > 0
+        End Get
+    End Property
+
     Public Sub Remove() Implements IUnit.Remove
         store.Delete(TABLE_UNITS, {(COLUMN_UNIT_ID, UnitId)})
     End Sub
