@@ -34,6 +34,12 @@ Public Class Profiles
         End Get
     End Property
 
+    Public ReadOnly Property BuildingTypes As IBuildingTypes Implements IProfiles.BuildingTypes
+        Get
+            Return New BuildingTypes(store)
+        End Get
+    End Property
+
     Public Function DoesProfileNameExist(profileName As String) As Boolean Implements IProfiles.DoesProfileNameExist
         Return store.GetCount(TABLE_PROFILES, {(COLUMN_PROFILE_NAME, profileName)}) > 0
     End Function
