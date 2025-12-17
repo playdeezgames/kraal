@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>KRAAL.Presentation</RootNamespace>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KRAAL.Model\KRAAL.Model.vbproj" />
+    <ProjectReference Include="..\TGGD.Presentation\TGGD.Presentation.vbproj" />
+  </ItemGroup>
+
+</Project>

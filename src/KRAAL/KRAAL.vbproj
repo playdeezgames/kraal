@@ -16,12 +16,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="template.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="template.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Spectre.Console" Version="0.54.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KRAAL.Domain\KRAAL.Domain.vbproj" />
-    <ProjectReference Include="..\KRAAL.Store\KRAAL.Store.vbproj" />
+    <ProjectReference Include="..\KRAAL.Model\KRAAL.Model.vbproj" />
+    <ProjectReference Include="..\KRAAL.Presentation\KRAAL.Presentation.vbproj" />
+    <ProjectReference Include="..\TGGD.Persistence.Sqlite\TGGD.Persistence.Sqlite.vbproj" />
+    <ProjectReference Include="..\TGGD.Presentation.Spectre\TGGD.Presentation.Spectre.vbproj" />
   </ItemGroup>
 
 </Project>

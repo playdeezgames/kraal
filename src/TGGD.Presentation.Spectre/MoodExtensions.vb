@@ -1,0 +1,109 @@
+﻿Imports System.Runtime.CompilerServices
+Imports Spectre.Console
+
+Public Module MoodExtensions
+    <Extension>
+    Friend Function ColorName(mood As Mood) As String
+        Select Case mood
+            Case Mood.Prompt
+                Return "olive"
+            Case Mood.Danger, Mood.Failure
+                Return "red"
+            Case Mood.Info
+                Return "silver"
+            Case Mood.Success
+                Return "lime"
+            Case Mood.Title
+                Return "fuchsia"
+            Case Mood.Warning
+                Return "yellow"
+            Case Mood.Header
+                Return "teal"
+            Case Mood.Black
+                Return "black"
+            Case Mood.Blue
+                Return "blue"
+            Case Mood.Green
+                Return "green"
+            Case Mood.Cyan
+                Return "teal"
+            Case Mood.Red
+                Return "red"
+            Case Mood.Purple
+                Return "purple"
+            Case Mood.Brown
+                Return "sandybrown"
+            Case Mood.LightGray
+                Return "silver"
+            Case Mood.DarkGray
+                Return "grey"
+            Case Mood.LightBlue
+                Return "lightskyblue1"
+            Case Mood.LightGreen
+                Return "lightgreen"
+            Case Mood.Orange
+                Return "orange1"
+            Case Mood.Pink
+                Return "pink1"
+            Case Mood.Tan
+                Return "tan"
+            Case Mood.Yellow
+                Return "yellow"
+            Case Mood.White
+                Return "white"
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
+    <Extension>
+    Friend Function ToColor(mood As Mood) As Color
+        Select Case mood
+            Case Mood.Prompt
+                Return Color.Olive
+            Case Mood.Danger, Mood.Failure
+                Return Color.Red
+            Case Mood.Info
+                Return Color.Silver
+            Case Mood.Success
+                Return Color.Lime
+            Case Mood.Title
+                Return Color.Fuchsia
+            Case Mood.Warning
+                Return Color.Yellow
+            Case Mood.Black
+                Return Color.Black
+            Case Mood.Blue
+                Return Color.Blue
+            Case Mood.Green
+                Return Color.Green
+            Case Mood.Cyan
+                Return Color.Teal
+            Case Mood.Red
+                Return Color.Red
+            Case Mood.Purple
+                Return Color.Purple
+            Case Mood.Brown
+                Return Color.SandyBrown
+            Case Mood.LightGray
+                Return Color.Silver
+            Case Mood.DarkGray
+                Return Color.Grey
+            Case Mood.LightBlue
+                Return Color.LightSkyBlue1
+            Case Mood.LightGreen
+                Return Color.LightGreen
+            Case Mood.Orange
+                Return Color.Orange1
+            Case Mood.Pink
+                Return Color.Pink1
+            Case Mood.Tan
+                Return Color.Tan
+            Case Mood.Yellow
+                Return Color.Yellow
+            Case Mood.White
+                Return Color.White
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
+End Module

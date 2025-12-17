@@ -1,12 +1,14 @@
-Imports KRAAL.Domain
-Imports KRAAL.Store
+Imports KRAAL.Model
+Imports KRAAL.Presentation
+Imports TGGD.Persistence.Sqlite
+Imports TGGD.Presentation.Spectre
 
 Module Program
-    Const CONNECTION_STRING = "Server=localhost;Port=3306;Database=kraal;Uid=root;Pwd=;"
     Sub Main(args As String())
-        Dim store As IDataStore = New DataStore()
-        store.Open(CONNECTION_STRING)
-        ProfileList.Run(New Profiles(store))
-        store.Close()
+        Using store As New Store()
+            MainMenu.Run(
+            KRAALModel.Create(store),
+            New UIContext())
+        End Using
     End Sub
 End Module
