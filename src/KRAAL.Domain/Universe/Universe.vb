@@ -28,4 +28,10 @@ Public Class Universe
             Return New Universes(store)
         End Get
     End Property
+
+    Public ReadOnly Property Stars As IStars Implements IUniverse.Stars
+        Get
+            Return New Stars(store, UniverseId)
+        End Get
+    End Property
 End Class

@@ -9,11 +9,18 @@ Public Module MainMenu
                 ui.Clear()
                 If model.HasUniverses Then
                     addChoice("Continue...", ChooseContinue(model, ui))
+                    addChoice("Edit...", ChooseEdit(model, ui))
                 End If
                 addChoice("New...", ChooseNew(model, ui))
                 addChoice("Quit", ChooseQuit(model, ui, quit))
             End Sub)
     End Sub
+
+    Private Function ChooseEdit(model As IKRAALModel, ui As IUIContext) As Action
+        Return Sub()
+                   UniverseEditListMenu.Run(model, ui)
+               End Sub
+    End Function
 
     Private Function ChooseNew(model As IKRAALModel, ui As IUIContext) As Action
         Return Sub()
