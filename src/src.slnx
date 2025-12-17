@@ -4,11 +4,11 @@
     <Project Path="TGGD.Persistence/TGGD.Persistence.vbproj" Id="38fe0dea-dd17-4f82-ba40-2038f80cf895" />
   </Folder>
   <Folder Name="/Presentation/">
-    <Project Path="KRAAL.Presentation/KRAAL.Presentation.vbproj" Id="6617cb2b-5025-473f-a197-acd3b396b5fd" />
+    <Project Path="KRAAL/KRAAL.vbproj" />
     <Project Path="TGGD.Presentation.Spectre/TGGD.Presentation.Spectre.vbproj" Id="36b19040-8bb2-4732-8a06-67123936bd24" />
     <Project Path="TGGD.Presentation/TGGD.Presentation.vbproj" Id="2b5bbb8a-e9b0-411c-96f5-4b9deda1d767" />
   </Folder>
   <Project Path="KRAAL.Domain/KRAAL.Domain.vbproj" Id="07d233d5-f427-42f5-a059-bcc6a4383ce1" />
   <Project Path="KRAAL.Model/KRAAL.Model.vbproj" Id="96a15b18-ae29-4702-afec-36726b598500" />
-  <Project Path="KRAAL/KRAAL.vbproj" />
+  <Project Path="KRAAL.Presentation/KRAAL.Presentation.vbproj" Id="6617cb2b-5025-473f-a197-acd3b396b5fd" />
 </Solution>

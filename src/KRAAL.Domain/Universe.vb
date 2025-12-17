@@ -7,6 +7,10 @@ Public Class Universe
         Me.UniverseId = universeId
     End Sub
 
+    Public Sub Remove() Implements IUniverse.Remove
+        store.Delete(TABLE_UNIVERSES, (COLUMN_UNIVERSE_ID, UniverseId))
+    End Sub
+
     Private ReadOnly store As IStore
     Public ReadOnly Property UniverseId As Integer Implements IUniverse.UniverseId
 

@@ -11,12 +11,25 @@ Friend Module GameMenu
                 ui.WriteLine((Mood.Info, $"Universe Name: {universe.Name}"))
                 addChoice("Continue", quit)
                 addChoice("Rename...", ChooseRename(universe, ui))
+                addChoice("Remove...", ChooseRemove(universe, ui, Sub()
+                                                                      quit()
+                                                                      quitParent()
+                                                                  End Sub))
                 addChoice("Exit to Main Menu", ChooseExit(ui, Sub()
                                                                   quit()
                                                                   quitParent()
                                                               End Sub))
             End Sub)
     End Sub
+
+    Private Function ChooseRemove(universe As IUniverseModel, ui As IUIContext, quit As Action) As Action
+        Return Sub()
+                   If ui.Confirm((Mood.Danger, $"Are you sure you want to remove universe '{universe.Name}'?")) Then
+                       universe.Remove()
+                       quit()
+                   End If
+               End Sub
+    End Function
 
     Private Function ChooseRename(universe As IUniverseModel, ui As IUIContext) As Action
         Return Sub()

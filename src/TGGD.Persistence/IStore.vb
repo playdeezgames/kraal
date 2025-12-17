@@ -19,4 +19,7 @@
                                    columnNames As IEnumerable(Of String),
                                    filters As IEnumerable(Of (Column As String, Value As Object)),
                                    converter As Func(Of IRecord, TResult)) As IEnumerable(Of TResult)
+    Sub Delete(
+            viewName As String,
+            ParamArray filters() As (Column As String, Value As Object))
 End Interface

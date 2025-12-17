@@ -15,6 +15,10 @@ Friend Class UniverseModel
         End Get
     End Property
 
+    Public Sub Remove() Implements IUniverseModel.Remove
+        universe.Remove()
+    End Sub
+
     Public Function TrySetName(newName As String) As Boolean Implements IUniverseModel.TrySetName
         If universe.Universes.FindByName(newName) Then
             Return False
