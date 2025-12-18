@@ -19,6 +19,14 @@ Public Class KRAALModel
         End Get
     End Property
 
+    Public Sub Export(filename As String) Implements IKRAALModel.Export
+        universes.Export(filename)
+    End Sub
+
+    Public Sub Import(filename As String) Implements IKRAALModel.Import
+        universes.Import(filename)
+    End Sub
+
     Public Shared Function Create(store As IStore) As IKRAALModel
         Return New KRAALModel(store)
     End Function

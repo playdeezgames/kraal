@@ -27,6 +27,12 @@ Friend Class UniverseModel
         End Get
     End Property
 
+    Public ReadOnly Property Parties As IEnumerable(Of IPartyModel) Implements IUniverseModel.Parties
+        Get
+            Return universe.Parties.All.Select(Function(x) New PartyModel(x))
+        End Get
+    End Property
+
     Public Sub Remove() Implements IUniverseModel.Remove
         universe.Remove()
     End Sub

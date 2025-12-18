@@ -22,4 +22,6 @@
     Sub Delete(
             viewName As String,
             ParamArray filters() As (Column As String, Value As Object))
+    Sub Export(filename As String)
+    Sub Import(filename As String)
 End Interface

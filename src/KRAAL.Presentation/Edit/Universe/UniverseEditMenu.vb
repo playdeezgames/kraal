@@ -9,12 +9,19 @@ Friend Module UniverseEditMenu
                 ui.Clear()
                 addChoice("Factions...", ChooseFactions(universe, ui))
                 addChoice("Stars...", ChooseStars(universe, ui))
+                addChoice("Parties...", ChooseParties(universe, ui))
                 addChoice("Exit", Sub()
                                       quit()
                                       quitParent()
                                   End Sub)
             End Sub)
     End Sub
+
+    Private Function ChooseParties(universe As IUniverseModel, ui As IUIContext) As Action
+        Return Sub()
+                   PartyEditListMenu.Run(universe, ui)
+               End Sub
+    End Function
 
     Private Function ChooseStars(universe As IUniverseModel, ui As IUIContext) As Action
         Return Sub()

@@ -10,6 +10,12 @@ Friend Module UniverseInitializer
     Friend Sub Initialize(universe As IUniverse)
         InitializeFactions(universe)
         InitializeStars(universe)
+        InitializeParties(universe)
+    End Sub
+
+    Private Sub InitializeParties(universe As IUniverse)
+        Dim playerParty = universe.Parties.Create()
+        universe.Player = playerParty
     End Sub
 
     Private Sub InitializeStars(universe As IUniverse)

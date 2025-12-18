@@ -25,6 +25,14 @@ Public Class Universes
         End Get
     End Property
 
+    Public Sub Export(filename As String) Implements IUniverses.Export
+        store.Export(filename)
+    End Sub
+
+    Public Sub Import(filename As String) Implements IUniverses.Import
+        store.Import(filename)
+    End Sub
+
     Public Shared Function Create(store As IStore) As IUniverses
         Return New Universes(store)
     End Function

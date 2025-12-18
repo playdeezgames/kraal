@@ -12,9 +12,29 @@ Public Module MainMenu
                     addChoice("Edit...", ChooseEdit(model, ui))
                 End If
                 addChoice("New...", ChooseNew(model, ui))
+                addChoice("Import...", ChooseImport(model, ui))
+                addChoice("Export...", ChooseExport(model, ui))
                 addChoice("Quit", ChooseQuit(model, ui, quit))
             End Sub)
     End Sub
+
+    Private Function ChooseExport(model As IKRAALModel, ui As IUIContext) As Action
+        Return Sub()
+                   Dim filename = ui.Ask((Mood.Prompt, "Export Filename:"), String.Empty)
+                   If Not String.IsNullOrEmpty(filename) Then
+                       model.Export(filename)
+                   End If
+               End Sub
+    End Function
+
+    Private Function ChooseImport(model As IKRAALModel, ui As IUIContext) As Action
+        Return Sub()
+                   Dim filename = ui.Ask((Mood.Prompt, "Import Filename:"), String.Empty)
+                   If Not String.IsNullOrEmpty(filename) Then
+                       model.Import(filename)
+                   End If
+               End Sub
+    End Function
 
     Private Function ChooseEdit(model As IKRAALModel, ui As IUIContext) As Action
         Return Sub()

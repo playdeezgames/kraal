@@ -3,4 +3,6 @@
     Function FindByName(universeName As String) As Boolean
     Function Create(universeName As String) As IUniverse
     ReadOnly Property All As IEnumerable(Of IUniverse)
+    Sub Export(filename As String)
+    Sub Import(filename As String)
 End Interface

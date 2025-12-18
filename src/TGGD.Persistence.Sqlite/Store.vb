@@ -2,13 +2,17 @@
 
 Public Class Store
     Implements IStore, IDisposable
+    Private Const SCAFFOLD_DB_FILENAME = "scaffold_db.sql"
 
     Private ReadOnly connection As SqliteConnection
     Private disposedValue As Boolean
 
     Public Sub New()
-        connection = New SqliteConnection("Data Source=template.db;")
+        connection = New SqliteConnection("Data Source=:memory:;")
         connection.Open()
+        Using command As New SqliteCommand(System.IO.File.ReadAllText(SCAFFOLD_DB_FILENAME), connection)
+            command.ExecuteNonQuery()
+        End Using
     End Sub
 
     Public Function GetCount(
@@ -130,6 +134,19 @@ WHERE {String.Join(" AND ", filters.Select(Function(x) $"{x.Column}=@Filter{x.Co
                 command.Parameters.AddWithValue($"@Filter{f.Column}", f.Value)
             Next
             command.ExecuteNonQuery()
+        End Using
+    End Sub
+
+    Public Sub Export(filename As String) Implements IStore.Export
+        Using command As New SqliteCommand($"VACUUM INTO ""{filename}"";", connection)
+            command.ExecuteNonQuery()
+        End Using
+    End Sub
+
+    Public Sub Import(filename As String) Implements IStore.Import
+        Using sourceConnection = New SqliteConnection($"Data Source={filename};")
+            sourceConnection.Open()
+            sourceConnection.BackupDatabase(connection)
         End Using
     End Sub
 End Class

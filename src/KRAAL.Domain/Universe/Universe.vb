@@ -40,4 +40,19 @@ Public Class Universe
             Return New Factions(store, UniverseId)
         End Get
     End Property
+
+    Public ReadOnly Property Parties As IParties Implements IUniverse.Parties
+        Get
+            Return New Parties(store, UniverseId)
+        End Get
+    End Property
+
+    Public Property Player As IParty Implements IUniverse.Player
+        Get
+            Return New Party(store, CInt(store.GetColumnValue(TABLE_UNIVERSES, COLUMN_PARTY_ID, (COLUMN_UNIVERSE_ID, UniverseId))))
+        End Get
+        Set(value As IParty)
+            store.SetColumnValue(TABLE_UNIVERSES, (COLUMN_PARTY_ID, value.PartyId), (COLUMN_UNIVERSE_ID, UniverseId))
+        End Set
+    End Property
 End Class
