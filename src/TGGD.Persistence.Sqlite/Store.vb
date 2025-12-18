@@ -138,8 +138,9 @@ WHERE {String.Join(" AND ", filters.Select(Function(x) $"{x.Column}=@Filter{x.Co
     End Sub
 
     Public Sub Export(filename As String) Implements IStore.Export
-        Using command As New SqliteCommand($"VACUUM INTO ""{filename}"";", connection)
-            command.ExecuteNonQuery()
+        Using destinationConnection = New SqliteConnection($"Data Source={filename};")
+            destinationConnection.Open()
+            connection.BackupDatabase(destinationConnection)
         End Using
     End Sub
 
