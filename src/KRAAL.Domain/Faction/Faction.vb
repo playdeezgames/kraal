@@ -4,7 +4,6 @@ Friend Class Faction
     Implements IFaction
 
     Private ReadOnly store As IStore
-    Private ReadOnly factionId As Integer
 
     Public Sub New(store As IStore, factionId As Integer)
         Me.store = store
@@ -13,16 +12,12 @@ Friend Class Faction
 
     Public Property FactionName As String Implements IFaction.FactionName
         Get
-            Throw New NotImplementedException()
+            Return CStr(store.GetColumnValue(TABLE_FACTIONS, COLUMN_FACTION_NAME, (COLUMN_FACTION_ID, FactionId)))
         End Get
         Set(value As String)
-            Throw New NotImplementedException()
+            store.SetColumnValue(TABLE_FACTIONS, (COLUMN_FACTION_NAME, value), (COLUMN_FACTION_NAME, FactionId))
         End Set
     End Property
 
-    Private ReadOnly Property IFaction_FactionId As Integer Implements IFaction.FactionId
-        Get
-            Throw New NotImplementedException()
-        End Get
-    End Property
+    Public ReadOnly Property FactionId As Integer Implements IFaction.FactionId
 End Class
