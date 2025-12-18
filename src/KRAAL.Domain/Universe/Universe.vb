@@ -34,4 +34,10 @@ Public Class Universe
             Return New Stars(store, UniverseId)
         End Get
     End Property
+
+    Public ReadOnly Property Factions As IFactions Implements IUniverse.Factions
+        Get
+            Return New Factions(store, UniverseId)
+        End Get
+    End Property
 End Class

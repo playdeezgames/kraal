@@ -1,4 +1,11 @@
 ﻿Friend Module Columns
     Friend Const COLUMN_UNIVERSE_ID = "universe_id"
     Friend Const COLUMN_UNIVERSE_NAME = "universe_name"
+    Friend Const COLUMN_FACTION_ID = "faction_id"
+    Friend Const COLUMN_FACTION_NAME = "faction_name"
+    Friend Const COLUMN_STAR_ID = "star_id"
+    Friend Const COLUMN_STAR_NAME = "star_name"
+    Friend Const COLUMN_STAR_X = "star_x"
+    Friend Const COLUMN_STAR_Y = "star_y"
+    Friend Const COLUMN_STAR_Z = "star_z"
 End Module

@@ -28,6 +28,8 @@ Public Class KRAALModel
     End Function
 
     Public Function CreateUniverse(universeName As String) As IUniverseModel Implements IKRAALModel.CreateUniverse
-        Return New UniverseModel(universes.Create(universeName))
+        Dim universe = universes.Create(universeName)
+        UniverseInitializer.Initialize(universe)
+        Return New UniverseModel(universe)
     End Function
 End Class

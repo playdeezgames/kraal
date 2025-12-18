@@ -15,6 +15,18 @@ Friend Class UniverseModel
         End Get
     End Property
 
+    Public ReadOnly Property Factions As IEnumerable(Of IFactionModel) Implements IUniverseModel.Factions
+        Get
+            Return universe.Factions.All.Select(Function(x) New FactionModel(x))
+        End Get
+    End Property
+
+    Public ReadOnly Property Stars As IEnumerable(Of IStarModel) Implements IUniverseModel.Stars
+        Get
+            Return universe.Stars.All.Select(Function(x) New StarModel(x))
+        End Get
+    End Property
+
     Public Sub Remove() Implements IUniverseModel.Remove
         universe.Remove()
     End Sub
