@@ -3,10 +3,9 @@ PRAGMA foreign_keys = ON;
 CREATE TABLE "universes" (
 	"universe_id"	INTEGER,
 	"universe_name"	INTEGER NOT NULL UNIQUE,
-	"party_id"	INTEGER,
+	"player_party_id"	INTEGER,
 	PRIMARY KEY("universe_id" AUTOINCREMENT),
-	FOREIGN KEY("party_id") REFERENCES "parties"("party_id") ON DELETE SET NULL,
-	FOREIGN KEY("party_id","universe_id") REFERENCES "parties"("party_id","universe_id")
+	FOREIGN KEY("player_party_id") REFERENCES "parties"("party_id") ON DELETE SET NULL
 );
 
 CREATE TABLE "stars" (
@@ -36,4 +35,12 @@ CREATE TABLE "parties" (
 	PRIMARY KEY("party_id" AUTOINCREMENT),
 	UNIQUE("party_id","universe_id"),
 	FOREIGN KEY("universe_id") REFERENCES "universes"("universe_id") ON DELETE CASCADE
+);
+
+CREATE TABLE "ships" (
+	"ship_id" INTEGER,
+	"ship_name" TEXT NOT NULL,
+	"party_id" INTEGER,
+	PRIMARY KEY("ship_id" AUTOINCREMENT),
+	FOREIGN KEY("party_id") REFERENCES "parties"("party_id") ON DELETE CASCADE
 );
