@@ -1,5 +1,4 @@
-﻿Imports System.Reflection.Metadata.Ecma335
-Imports KRAAL.Domain
+﻿Imports KRAAL.Domain
 
 Friend Class PartyModel
     Implements IPartyModel
@@ -21,4 +20,8 @@ Friend Class PartyModel
             Return playerParty IsNot Nothing AndAlso playerParty.PartyId = party.PartyId
         End Get
     End Property
+
+    Public Sub SetPlayerParty() Implements IPartyModel.SetPlayerParty
+        party.Universe.PlayerParty = party
+    End Sub
 End Class

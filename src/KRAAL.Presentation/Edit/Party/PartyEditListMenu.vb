@@ -14,11 +14,18 @@ Friend Module PartyEditListMenu
                 Else
                     ui.WriteLine((Mood.Info, $"Player Party: None"))
                 End If
+                addChoice("(new party)", ChooseNewParty(universe, ui))
                 For Each party In universe.Parties
                     addChoice(party.ID, ChooseParty(party, ui))
                 Next
             End Sub)
     End Sub
+
+    Private Function ChooseNewParty(universe As IUniverseModel, ui As IUIContext) As Action
+        Return Sub()
+                   PartyEditMenu.Run(universe.CreateParty(), ui)
+               End Sub
+    End Function
 
     Private Function ChooseParty(party As IPartyModel, ui As IUIContext) As Action
         Return Sub()

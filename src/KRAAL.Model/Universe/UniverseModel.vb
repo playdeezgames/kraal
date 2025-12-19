@@ -55,4 +55,8 @@ Friend Class UniverseModel
     Public Function HasPlayerParty() As Boolean Implements IUniverseModel.HasPlayerParty
         Return universe.PlayerParty IsNot Nothing
     End Function
+
+    Public Function CreateParty() As IPartyModel Implements IUniverseModel.CreateParty
+        Return New PartyModel(universe.Parties.Create())
+    End Function
 End Class

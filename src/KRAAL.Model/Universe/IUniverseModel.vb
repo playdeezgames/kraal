@@ -7,4 +7,5 @@
     ReadOnly Property Factions As IEnumerable(Of IFactionModel)
     ReadOnly Property Stars As IEnumerable(Of IStarModel)
     ReadOnly Property Parties As IEnumerable(Of IPartyModel)
+    Function CreateParty() As IPartyModel
 End Interface
