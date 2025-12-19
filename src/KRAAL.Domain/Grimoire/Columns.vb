@@ -10,4 +10,6 @@
     Friend Const COLUMN_STAR_Z = "star_z"
     Friend Const COLUMN_PARTY_ID = "party_id"
     Friend Const COLUMN_PLAYER_PARTY_ID = "player_party_id"
+    Friend Const COLUMN_SHIP_ID = "ship_id"
+    Friend Const COLUMN_SHIP_NAME = "ship_name"
 End Module
