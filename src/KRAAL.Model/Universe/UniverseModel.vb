@@ -33,6 +33,13 @@ Friend Class UniverseModel
         End Get
     End Property
 
+    Public ReadOnly Property PlayerParty As IPartyModel Implements IUniverseModel.PlayerParty
+        Get
+            Dim party = universe.PlayerParty
+            Return If(party IsNot Nothing, New PartyModel(party), Nothing)
+        End Get
+    End Property
+
     Public Sub Remove() Implements IUniverseModel.Remove
         universe.Remove()
     End Sub
@@ -43,5 +50,9 @@ Friend Class UniverseModel
         End If
         universe.UniverseName = newName
         Return True
+    End Function
+
+    Public Function HasPlayerParty() As Boolean Implements IUniverseModel.HasPlayerParty
+        Return universe.PlayerParty IsNot Nothing
     End Function
 End Class

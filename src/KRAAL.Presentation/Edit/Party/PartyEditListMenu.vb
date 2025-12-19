@@ -7,6 +7,13 @@ Friend Module PartyEditListMenu
             (Mood.Prompt, "Edit Which Party?"),
             Sub(addChoice, quit)
                 addChoice("Never Mind", quit)
+                ui.Clear()
+                ui.WriteLine((Mood.Info, $"Universe: {universe.Name}"))
+                If universe.HasPlayerParty Then
+                    ui.WriteLine((Mood.Info, $"Player Party: {universe.PlayerParty.ID}"))
+                Else
+                    ui.WriteLine((Mood.Info, $"Player Party: None"))
+                End If
                 For Each party In universe.Parties
                     addChoice(party.ID, ChooseParty(party, ui))
                 Next

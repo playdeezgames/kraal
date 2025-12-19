@@ -44,13 +44,7 @@ Public Module MainMenu
 
     Private Function ChooseNew(model As IKRAALModel, ui As IUIContext) As Action
         Return Sub()
-                   Dim universeName = ui.Ask(Of String)((Mood.Prompt, "Universe Name:"), String.Empty)
-                   If model.HasUniverseWithName(universeName) Then
-                       ui.Message((Mood.Danger, $"There is already a universe named '{universeName}'."))
-                       Return
-                   End If
-                   Dim universe = model.CreateUniverse(universeName)
-                   UniverseMenu.Run(universe, ui, Sub() Return)
+                   UniverseEmbarkMenu.Run(model, ui, Sub() Return)
                End Sub
     End Function
 

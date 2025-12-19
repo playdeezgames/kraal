@@ -10,6 +10,9 @@ Friend Module PartyEditMenu
             Sub(addChoice, quit)
                 ui.Clear()
                 ui.WriteLine((Mood.Info, $"Party ID: {party.ID}"))
+                If party.IsPlayerParty Then
+                    ui.WriteLine((Mood.Info, "PLAYER PARTY"))
+                End If
                 addChoice("Never Mind", quit)
             End Sub)
     End Sub

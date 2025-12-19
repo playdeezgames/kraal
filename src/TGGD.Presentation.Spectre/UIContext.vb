@@ -41,7 +41,9 @@ Public Class UIContext
         Dim selector As New SelectionPrompt(Of Integer) With
             {
                 .Title = $"[{prompt.Mood.ColorName}]{Markup.Escape(prompt.Text)}[/]",
-                .Converter = Function(index) Markup.Escape(choices(index).Text)
+                .Converter = Function(index) Markup.Escape(choices(index).Text),
+                .WrapAround = True,
+                .SearchEnabled = True
             }
         selector.AddChoices(Enumerable.Range(0, choices.Length))
         Return choices(AnsiConsole.Prompt(selector)).Value

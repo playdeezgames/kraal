@@ -5,6 +5,6 @@
     ReadOnly Property Stars As IStars
     ReadOnly Property Factions As IFactions
     ReadOnly Property Parties As IParties
-    Property Player As IParty
+    Property PlayerParty As IParty
     Sub Remove()
 End Interface

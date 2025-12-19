@@ -5,7 +5,8 @@ CREATE TABLE "universes" (
 	"universe_name"	INTEGER NOT NULL UNIQUE,
 	"party_id"	INTEGER,
 	PRIMARY KEY("universe_id" AUTOINCREMENT),
-	FOREIGN KEY("party_id") REFERENCES "parties"("party_id") ON DELETE SET NULL
+	FOREIGN KEY("party_id") REFERENCES "parties"("party_id") ON DELETE SET NULL,
+	FOREIGN KEY("party_id","universe_id") REFERENCES "parties"("party_id","universe_id")
 );
 
 CREATE TABLE "stars" (

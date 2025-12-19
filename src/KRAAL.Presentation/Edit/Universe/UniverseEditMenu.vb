@@ -7,6 +7,7 @@ Friend Module UniverseEditMenu
             (Mood.Prompt, "Now What?"),
             Sub(addChoice, quit)
                 ui.Clear()
+                ui.WriteLine((Mood.Info, $"Universe: {universe.Name}"))
                 addChoice("Factions...", ChooseFactions(universe, ui))
                 addChoice("Stars...", ChooseStars(universe, ui))
                 addChoice("Parties...", ChooseParties(universe, ui))

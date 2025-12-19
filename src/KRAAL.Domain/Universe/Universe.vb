@@ -47,7 +47,7 @@ Public Class Universe
         End Get
     End Property
 
-    Public Property Player As IParty Implements IUniverse.Player
+    Public Property PlayerParty As IParty Implements IUniverse.PlayerParty
         Get
             Return New Party(store, CInt(store.GetColumnValue(TABLE_UNIVERSES, COLUMN_PARTY_ID, (COLUMN_UNIVERSE_ID, UniverseId))))
         End Get
