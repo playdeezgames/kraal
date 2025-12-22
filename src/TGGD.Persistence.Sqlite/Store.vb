@@ -104,18 +104,6 @@ WHERE {String.Join(" AND ", filters.Select(Function(x) $"{x.Column}=@Filter{x.Co
         End Using
     End Sub
 
-    Public Function LegacyGetRecords(Of TResult)(
-                                          viewName As String,
-                                          columnNames As IEnumerable(Of String),
-                                          filters As IEnumerable(Of (Column As String, Value As Object)),
-                                          converter As Func(Of IRecord, TResult)) As IEnumerable(Of TResult) Implements IStore.LegacyGetRecords
-        Return GetRecords(
-            viewName,
-            columnNames,
-            filters.Select(Function(x) (x.Column, Compare.EQ, x.Value)),
-            converter)
-    End Function
-
     Public Sub Delete(
                      viewName As String,
                      ParamArray filters() As (Column As String, Value As Object)) Implements IStore.Delete

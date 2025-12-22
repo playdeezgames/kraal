@@ -14,11 +14,6 @@
                       viewName As String,
                       columnValue As (Column As String, Value As Object),
                       ParamArray filters() As (Column As String, Value As Object))
-    Function LegacyGetRecords(Of TResult)(
-                                   viewName As String,
-                                   columnNames As IEnumerable(Of String),
-                                   filters As IEnumerable(Of (Column As String, Value As Object)),
-                                   converter As Func(Of IRecord, TResult)) As IEnumerable(Of TResult)
     Function GetRecords(Of TResult)(
                                    viewName As String,
                                    columnNames As IEnumerable(Of String),

@@ -13,10 +13,10 @@ Friend Class Stars
 
     Public ReadOnly Property All As IEnumerable(Of IStar) Implements IStars.All
         Get
-            Return store.LegacyGetRecords(Of IStar)(
+            Return store.GetRecords(Of IStar)(
                 TABLE_STARS,
                 {COLUMN_STAR_ID},
-                {(COLUMN_UNIVERSE_ID, universeId)},
+                {(COLUMN_UNIVERSE_ID, Compare.EQ, universeId)},
                 Function(x) New Star(store, x.GetInt32(0)))
         End Get
     End Property

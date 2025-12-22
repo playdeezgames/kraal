@@ -13,10 +13,10 @@ Friend Class Ships
 
     Public ReadOnly Property All As IEnumerable(Of IShip) Implements IShips.All
         Get
-            Return store.LegacyGetRecords(Of IShip)(
+            Return store.GetRecords(Of IShip)(
                 TABLE_SHIPS,
                 {COLUMN_SHIP_ID},
-                {(COLUMN_PARTY_ID, partyId)},
+                {(COLUMN_PARTY_ID, Compare.EQ, partyId)},
                 Function(x) New Ship(store, x.GetInt32(0)))
         End Get
     End Property

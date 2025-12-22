@@ -13,10 +13,10 @@ Friend Class Factions
 
     Public ReadOnly Property All As IEnumerable(Of IFaction) Implements IFactions.All
         Get
-            Return store.LegacyGetRecords(Of IFaction)(
+            Return store.GetRecords(Of IFaction)(
                 TABLE_FACTIONS,
                 {COLUMN_FACTION_ID},
-                {(COLUMN_UNIVERSE_ID, universeId)},
+                {(COLUMN_UNIVERSE_ID, Compare.EQ, universeId)},
                 Function(x) New Faction(store, x.GetInt32(0)))
         End Get
     End Property
