@@ -13,7 +13,7 @@ Friend Class Ships
 
     Public ReadOnly Property All As IEnumerable(Of IShip) Implements IShips.All
         Get
-            Return store.GetRecords(Of IShip)(
+            Return store.LegacyGetRecords(Of IShip)(
                 TABLE_SHIPS,
                 {COLUMN_SHIP_ID},
                 {(COLUMN_PARTY_ID, partyId)},

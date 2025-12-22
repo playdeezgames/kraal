@@ -44,8 +44,8 @@ Friend Class Ship
             VIEW_STAR_SHIP_DISTANCES,
             {COLUMN_STAR_ID},
             {
-                (COLUMN_SHIP_ID, ShipId),
-                (COLUMN_DISTANCE, distance)
+                (COLUMN_SHIP_ID, Compare.EQ, ShipId),
+                (COLUMN_DISTANCE, Compare.LE, distance)
             },
             Function(x) New Star(store, x.GetInt32(0)))
     End Function

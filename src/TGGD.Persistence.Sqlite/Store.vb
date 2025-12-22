@@ -104,25 +104,16 @@ WHERE {String.Join(" AND ", filters.Select(Function(x) $"{x.Column}=@Filter{x.Co
         End Using
     End Sub
 
-    Public Function GetRecords(Of TResult)(
+    Public Function LegacyGetRecords(Of TResult)(
                                           viewName As String,
                                           columnNames As IEnumerable(Of String),
                                           filters As IEnumerable(Of (Column As String, Value As Object)),
-                                          converter As Func(Of IRecord, TResult)) As IEnumerable(Of TResult) Implements IStore.GetRecords
-        Dim result As New List(Of TResult)
-        Using command As New SqliteCommand($"SELECT {String.Join(",", columnNames)} FROM {viewName}{If(filters.Count > 0, $"
-WHERE {String.Join(" AND ", filters.Select(Function(x) $"{x.Column}=@Filter{x.Column}"))}", "")};", connection)
-            For Each f In filters
-                command.Parameters.AddWithValue($"@Filter{f.Column}", f.Value)
-            Next
-            Using reader = command.ExecuteReader
-                Dim record As IRecord = New Record(reader)
-                While reader.Read
-                    result.Add(converter(record))
-                End While
-            End Using
-        End Using
-        Return result
+                                          converter As Func(Of IRecord, TResult)) As IEnumerable(Of TResult) Implements IStore.LegacyGetRecords
+        Return GetRecords(
+            viewName,
+            columnNames,
+            filters.Select(Function(x) (x.Column, Compare.EQ, x.Value)),
+            converter)
     End Function
 
     Public Sub Delete(
@@ -150,4 +141,35 @@ WHERE {String.Join(" AND ", filters.Select(Function(x) $"{x.Column}=@Filter{x.Co
             sourceConnection.BackupDatabase(connection)
         End Using
     End Sub
+
+    Public Function GetRecords(Of TResult)(
+                                          viewName As String,
+                                          columnNames As IEnumerable(Of String),
+                                          filters As IEnumerable(Of (Column As String, Compare As Compare, Value As Object)), converter As Func(Of IRecord, TResult)) As IEnumerable(Of TResult) Implements IStore.GetRecords
+        Dim result As New List(Of TResult)
+        Using command As New SqliteCommand($"SELECT {String.Join(",", columnNames)} FROM {viewName}{If(filters.Count > 0, $"
+WHERE {String.Join(" AND ", filters.Select(Function(x) $"{x.Column}{ToOperator(x.Compare)}@Filter{x.Column}"))}", "")};", connection)
+            For Each f In filters
+                command.Parameters.AddWithValue($"@Filter{f.Column}", f.Value)
+            Next
+            Using reader = command.ExecuteReader
+                Dim record As IRecord = New Record(reader)
+                While reader.Read
+                    result.Add(converter(record))
+                End While
+            End Using
+        End Using
+        Return result
+    End Function
+
+    Private Shared Function ToOperator(compare As Compare) As String
+        Select Case compare
+            Case Compare.EQ
+                Return "="
+            Case Compare.LE
+                Return "<="
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
 End Class

@@ -13,7 +13,7 @@ Friend Class Parties
 
     Public ReadOnly Property All As IEnumerable(Of IParty) Implements IParties.All
         Get
-            Return store.GetRecords(Of IParty)(
+            Return store.LegacyGetRecords(Of IParty)(
                 TABLE_PARTIES,
                 {COLUMN_PARTY_ID},
                 {(COLUMN_UNIVERSE_ID, universeId)},

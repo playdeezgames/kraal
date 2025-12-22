@@ -17,7 +17,7 @@ Public Class Universes
 
     Public ReadOnly Property All As IEnumerable(Of IUniverse) Implements IUniverses.All
         Get
-            Return store.GetRecords(Of IUniverse)(
+            Return store.LegacyGetRecords(Of IUniverse)(
                 TABLE_UNIVERSES,
                 {COLUMN_UNIVERSE_ID},
                 {},

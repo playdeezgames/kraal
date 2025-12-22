@@ -2,14 +2,15 @@
 
 Friend Module UniverseInitializer
     Private Const FACTION_COUNT = 5
-    Private Const STAR_COUNT = 100
     Private Const UNIVERSE_SIZE_X = 100.0
     Private Const UNIVERSE_SIZE_Y = 100.0
     Private Const UNIVERSE_SIZE_Z = 100.0
+    Private Const STAR_GENERATOR_TRY_COUNT = 1000
+    Private Const MINIMUM_STAR_DISTANCE = 10.0
     Private ReadOnly random As New Random()
     Friend Sub Initialize(universe As IUniverse)
         InitializeFactions(universe)
-        InitializeStars(universe)
+        InitializeStars(universe, STAR_GENERATOR_TRY_COUNT)
         InitializeParties(universe)
     End Sub
 
@@ -23,20 +24,31 @@ Friend Module UniverseInitializer
         playerParty.CreateShip("Shippy McShipface", shipX, shipY, shipZ)
     End Sub
 
-    Private Sub InitializeStars(universe As IUniverse)
-        For Each dummy In Enumerable.Range(0, STAR_COUNT)
-            GenerateStar(universe)
-        Next
+    Private Sub InitializeStars(universe As IUniverse, tryCount As Integer)
+        Dim attempt As Integer = 0
+        Dim positions As New List(Of (X As Double, Y As Double, Z As Double))
+        Do While attempt < tryCount
+            If GenerateStar(universe, positions) Then
+                attempt = 0
+            Else
+                attempt += 1
+            End If
+        Loop
     End Sub
 
-    Private Sub GenerateStar(universe As IUniverse)
-        Dim starCount = universe.Stars.Count
-        Dim starName = $"Star #{starCount + 1}"
+    Private Function GenerateStar(universe As IUniverse, positions As List(Of (X As Double, Y As Double, Z As Double))) As Boolean
         Dim starX = UNIVERSE_SIZE_X * random.NextDouble()
         Dim starY = UNIVERSE_SIZE_Y * random.NextDouble()
         Dim starZ = UNIVERSE_SIZE_Z * random.NextDouble()
+        If positions.Any(Function(p) Math.Sqrt(Math.Pow(starX - p.X, 2) + Math.Pow(starY - p.Y, 2) + Math.Pow(starZ - p.Z, 2)) < MINIMUM_STAR_DISTANCE) Then
+            Return False
+        End If
+        Dim starCount = universe.Stars.Count
+        Dim starName = $"Star #{starCount + 1}"
         universe.Stars.Create(starName, starX, starY, starZ)
-    End Sub
+        positions.Add((starX, starY, starZ))
+        Return True
+    End Function
 
     Private Sub InitializeFactions(universe As IUniverse)
         For Each dummy In Enumerable.Range(0, FACTION_COUNT)

@@ -13,7 +13,7 @@ Friend Class Stars
 
     Public ReadOnly Property All As IEnumerable(Of IStar) Implements IStars.All
         Get
-            Return store.GetRecords(Of IStar)(
+            Return store.LegacyGetRecords(Of IStar)(
                 TABLE_STARS,
                 {COLUMN_STAR_ID},
                 {(COLUMN_UNIVERSE_ID, universeId)},
