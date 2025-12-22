@@ -16,7 +16,11 @@ Friend Module UniverseInitializer
     Private Sub InitializeParties(universe As IUniverse)
         Dim playerParty = universe.Parties.Create()
         universe.PlayerParty = playerParty
-        playerParty.CreateShip("Shippy McShipface")
+        Dim allStars = universe.Stars.All
+        Dim shipX = allStars.Average(Function(x) x.StarX)
+        Dim shipY = allStars.Average(Function(x) x.StarY)
+        Dim shipZ = allStars.Average(Function(x) x.StarZ)
+        playerParty.CreateShip("Shippy McShipface", shipX, shipY, shipZ)
     End Sub
 
     Private Sub InitializeStars(universe As IUniverse)

@@ -8,6 +8,8 @@ Friend Module ShipMenu
             Sub(addChoice, quit)
                 ui.Clear()
                 ui.WriteLine((Mood.Info, $"Ship: {ship.Name}"))
+                Dim position = ship.Position
+                ui.WriteLine((Mood.Info, $"Position: ({position.X:f2}, {position.Y:f2}, {position.Z:f2})"))
                 addChoice("Quit", quit)
             End Sub)
     End Sub

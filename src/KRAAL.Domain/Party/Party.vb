@@ -24,14 +24,17 @@ Friend Class Party
         End Get
     End Property
 
-    Public Function CreateShip(shipName As String) As IShip Implements IParty.CreateShip
+    Public Function CreateShip(shipName As String, shipX As Double, shipY As Double, shipZ As Double) As IShip Implements IParty.CreateShip
         Return New Ship(
             store,
             CInt(store.Create(
                 TABLE_SHIPS,
                 {
                     (COLUMN_PARTY_ID, PartyId),
-                    (COLUMN_SHIP_NAME, shipName)
+                    (COLUMN_SHIP_NAME, shipName),
+                    (COLUMN_SHIP_X, shipX),
+                    (COLUMN_SHIP_Y, shipY),
+                    (COLUMN_SHIP_Z, shipZ)
                 },
                 COLUMN_SHIP_ID)))
     End Function

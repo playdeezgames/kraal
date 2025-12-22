@@ -41,6 +41,9 @@ CREATE TABLE "ships" (
 	"ship_id" INTEGER,
 	"ship_name" TEXT NOT NULL,
 	"party_id" INTEGER,
+	"ship_x"	REAL NOT NULL,
+	"ship_y"	REAL NOT NULL,
+	"ship_z"	REAL NOT NULL,
 	PRIMARY KEY("ship_id" AUTOINCREMENT),
 	FOREIGN KEY("party_id") REFERENCES "parties"("party_id") ON DELETE CASCADE
 );
