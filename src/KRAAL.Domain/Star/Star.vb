@@ -15,7 +15,7 @@ Friend Class Star
             Return CStr(store.GetColumnValue(
                 TABLE_STARS,
                 COLUMN_STAR_NAME,
-                (COLUMN_STAR_ID, StarId)))
+                (COLUMN_STAR_ID, Compare.EQ, StarId)))
         End Get
         Set(value As String)
             store.SetColumnValue(
@@ -32,7 +32,7 @@ Friend Class Star
             Return CDbl(store.GetColumnValue(
                 TABLE_STARS,
                 COLUMN_STAR_X,
-                (COLUMN_STAR_ID, StarId)))
+                (COLUMN_STAR_ID, Compare.EQ, StarId)))
         End Get
     End Property
 
@@ -41,7 +41,7 @@ Friend Class Star
             Return CDbl(store.GetColumnValue(
                 TABLE_STARS,
                 COLUMN_STAR_Y,
-                (COLUMN_STAR_ID, StarId)))
+                (COLUMN_STAR_ID, Compare.EQ, StarId)))
         End Get
     End Property
 
@@ -50,7 +50,7 @@ Friend Class Star
             Return CDbl(store.GetColumnValue(
                 TABLE_STARS,
                 COLUMN_STAR_Z,
-                (COLUMN_STAR_ID, StarId)))
+                (COLUMN_STAR_ID, Compare.EQ, StarId)))
         End Get
     End Property
 End Class

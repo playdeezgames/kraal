@@ -12,7 +12,7 @@ Friend Class Faction
 
     Public Property FactionName As String Implements IFaction.FactionName
         Get
-            Return CStr(store.GetColumnValue(TABLE_FACTIONS, COLUMN_FACTION_NAME, (COLUMN_FACTION_ID, FactionId)))
+            Return CStr(store.GetColumnValue(TABLE_FACTIONS, COLUMN_FACTION_NAME, (COLUMN_FACTION_ID, Compare.EQ, FactionId)))
         End Get
         Set(value As String)
             store.SetColumnValue(TABLE_FACTIONS, (COLUMN_FACTION_NAME, value), (COLUMN_FACTION_NAME, Compare.EQ, FactionId))

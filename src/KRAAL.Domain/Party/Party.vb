@@ -14,7 +14,7 @@ Friend Class Party
 
     Public ReadOnly Property Universe As IUniverse Implements IParty.Universe
         Get
-            Return New Universe(store, CInt(store.GetColumnValue(TABLE_PARTIES, COLUMN_UNIVERSE_ID, (COLUMN_PARTY_ID, PartyId))))
+            Return New Universe(store, CInt(store.GetColumnValue(TABLE_PARTIES, COLUMN_UNIVERSE_ID, (COLUMN_PARTY_ID, Compare.EQ, PartyId))))
         End Get
     End Property
 

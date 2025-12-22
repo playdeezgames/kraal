@@ -9,7 +9,7 @@
     Function GetColumnValue(
                            viewName As String,
                            columnName As String,
-                           ParamArray filters() As (Column As String, Value As Object)) As Object
+                           ParamArray filters() As (Column As String, Compare As Compare, Value As Object)) As Object
     Sub SetColumnValue(
                       viewName As String,
                       columnValue As (Column As String, Value As Object),

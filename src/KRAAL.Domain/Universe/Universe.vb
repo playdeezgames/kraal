@@ -18,7 +18,7 @@ Public Class Universe
 
     Public Property UniverseName As String Implements IUniverse.UniverseName
         Get
-            Return CStr(store.GetColumnValue(TABLE_UNIVERSES, COLUMN_UNIVERSE_NAME, (COLUMN_UNIVERSE_ID, UniverseId)))
+            Return CStr(store.GetColumnValue(TABLE_UNIVERSES, COLUMN_UNIVERSE_NAME, (COLUMN_UNIVERSE_ID, Compare.EQ, UniverseId)))
         End Get
         Set(value As String)
             store.SetColumnValue(TABLE_UNIVERSES, (COLUMN_UNIVERSE_NAME, value), (COLUMN_UNIVERSE_ID, Compare.EQ, UniverseId))
@@ -51,7 +51,7 @@ Public Class Universe
 
     Public Property PlayerParty As IParty Implements IUniverse.PlayerParty
         Get
-            Return New Party(store, CInt(store.GetColumnValue(TABLE_UNIVERSES, COLUMN_PLAYER_PARTY_ID, (COLUMN_UNIVERSE_ID, UniverseId))))
+            Return New Party(store, CInt(store.GetColumnValue(TABLE_UNIVERSES, COLUMN_PLAYER_PARTY_ID, (COLUMN_UNIVERSE_ID, Compare.EQ, UniverseId))))
         End Get
         Set(value As IParty)
             store.SetColumnValue(TABLE_UNIVERSES, (COLUMN_PLAYER_PARTY_ID, value.PartyId), (COLUMN_UNIVERSE_ID, Compare.EQ, UniverseId))

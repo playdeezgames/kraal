@@ -14,7 +14,7 @@ Friend Class Ship
 
     Public Property ShipName As String Implements IShip.ShipName
         Get
-            Return CStr(store.GetColumnValue(TABLE_SHIPS, COLUMN_SHIP_NAME, (COLUMN_SHIP_ID, ShipId)))
+            Return CStr(store.GetColumnValue(TABLE_SHIPS, COLUMN_SHIP_NAME, (COLUMN_SHIP_ID, Compare.EQ, ShipId)))
         End Get
         Set(value As String)
             store.SetColumnValue(TABLE_SHIPS, (COLUMN_SHIP_NAME, value), (COLUMN_SHIP_ID, Compare.EQ, ShipId))
@@ -23,19 +23,19 @@ Friend Class Ship
 
     Public ReadOnly Property ShipX As Double Implements IShip.ShipX
         Get
-            Return CDbl(store.GetColumnValue(TABLE_SHIPS, COLUMN_SHIP_X, (COLUMN_SHIP_ID, ShipId)))
+            Return CDbl(store.GetColumnValue(TABLE_SHIPS, COLUMN_SHIP_X, (COLUMN_SHIP_ID, Compare.EQ, ShipId)))
         End Get
     End Property
 
     Public ReadOnly Property ShipY As Double Implements IShip.ShipY
         Get
-            Return CDbl(store.GetColumnValue(TABLE_SHIPS, COLUMN_SHIP_Y, (COLUMN_SHIP_ID, ShipId)))
+            Return CDbl(store.GetColumnValue(TABLE_SHIPS, COLUMN_SHIP_Y, (COLUMN_SHIP_ID, Compare.EQ, ShipId)))
         End Get
     End Property
 
     Public ReadOnly Property ShipZ As Double Implements IShip.ShipZ
         Get
-            Return CDbl(store.GetColumnValue(TABLE_SHIPS, COLUMN_SHIP_Z, (COLUMN_SHIP_ID, ShipId)))
+            Return CDbl(store.GetColumnValue(TABLE_SHIPS, COLUMN_SHIP_Z, (COLUMN_SHIP_ID, Compare.EQ, ShipId)))
         End Get
     End Property
 
