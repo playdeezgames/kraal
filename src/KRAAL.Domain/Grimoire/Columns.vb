@@ -15,4 +15,5 @@
     Friend Const COLUMN_SHIP_X = "ship_x"
     Friend Const COLUMN_SHIP_Y = "ship_y"
     Friend Const COLUMN_SHIP_Z = "ship_z"
+    Friend Const COLUMN_DISTANCE = "distance"
 End Module

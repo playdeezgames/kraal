@@ -47,3 +47,14 @@ CREATE TABLE "ships" (
 	PRIMARY KEY("ship_id" AUTOINCREMENT),
 	FOREIGN KEY("party_id") REFERENCES "parties"("party_id") ON DELETE CASCADE
 );
+
+CREATE VIEW "star_ship_distances" AS
+	SELECT
+		sh.ship_id,
+		st.star_id,
+		SQRT(POW(sh.ship_x-st.star_x,2)+POW(sh.ship_y-st.star_y,2)+POW(sh.ship_z-st.star_z,2)) distance
+	FROM
+		ships sh
+		JOIN parties p ON sh.party_id = p.party_id
+		JOIN universes u on u.universe_id = p.universe_id
+		JOIN stars st on u.universe_id = st.universe_id

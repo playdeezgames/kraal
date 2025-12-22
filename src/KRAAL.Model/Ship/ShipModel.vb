@@ -19,4 +19,10 @@ Friend Class ShipModel
             Return (ship.ShipX, ship.ShipY, ship.ShipZ)
         End Get
     End Property
+
+    Public ReadOnly Property NearbyStars As IEnumerable(Of IStarModel) Implements IShipModel.NearbyStars
+        Get
+            Return ship.GetNearbyStars(DEFAULT_SCANNER_RANGE).Select(Function(x) New StarModel(x))
+        End Get
+    End Property
 End Class

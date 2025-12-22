@@ -38,4 +38,15 @@ Friend Class Ship
             Return CDbl(store.GetColumnValue(TABLE_SHIPS, COLUMN_SHIP_Z, (COLUMN_SHIP_ID, ShipId)))
         End Get
     End Property
+
+    Public Function GetNearbyStars(distance As Double) As IEnumerable(Of IStar) Implements IShip.GetNearbyStars
+        Return store.GetRecords(Of IStar)(
+            VIEW_STAR_SHIP_DISTANCES,
+            {COLUMN_STAR_ID},
+            {
+                (COLUMN_SHIP_ID, ShipId),
+                (COLUMN_DISTANCE, distance)
+            },
+            Function(x) New Star(store, x.GetInt32(0)))
+    End Function
 End Class
