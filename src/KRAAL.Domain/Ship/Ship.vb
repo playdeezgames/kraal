@@ -14,10 +14,10 @@ Friend Class Ship
 
     Public Property ShipName As String Implements IShip.ShipName
         Get
-            Throw New NotImplementedException()
+            Return CStr(store.GetColumnValue(TABLE_SHIPS, COLUMN_SHIP_NAME, (COLUMN_SHIP_ID, ShipId)))
         End Get
         Set(value As String)
-            Throw New NotImplementedException()
+            store.SetColumnValue(TABLE_SHIPS, (COLUMN_SHIP_NAME, value), (COLUMN_SHIP_ID, ShipId))
         End Set
     End Property
 End Class

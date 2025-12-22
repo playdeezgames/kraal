@@ -21,6 +21,12 @@ Friend Class PartyModel
         End Get
     End Property
 
+    Public ReadOnly Property Ships As IEnumerable(Of IShipModel) Implements IPartyModel.Ships
+        Get
+            Return party.Ships.All.Select(Function(x) New ShipModel(x))
+        End Get
+    End Property
+
     Public Sub SetPlayerParty() Implements IPartyModel.SetPlayerParty
         party.Universe.PlayerParty = party
     End Sub

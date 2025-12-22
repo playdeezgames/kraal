@@ -18,6 +18,12 @@ Friend Class Party
         End Get
     End Property
 
+    Public ReadOnly Property Ships As IShips Implements IParty.Ships
+        Get
+            Return New Ships(store, PartyId)
+        End Get
+    End Property
+
     Public Function CreateShip(shipName As String) As IShip Implements IParty.CreateShip
         Return New Ship(
             store,
