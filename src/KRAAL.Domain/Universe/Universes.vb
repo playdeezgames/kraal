@@ -38,7 +38,7 @@ Public Class Universes
     End Function
 
     Public Function FindByName(universeName As String) As Boolean Implements IUniverses.FindByName
-        Return store.GetCount(TABLE_UNIVERSES, (COLUMN_UNIVERSE_NAME, universeName)) > 0
+        Return store.GetCount(TABLE_UNIVERSES, (COLUMN_UNIVERSE_NAME, Compare.EQ, universeName)) > 0
     End Function
 
     Public Function Create(universeName As String) As IUniverse Implements IUniverses.Create

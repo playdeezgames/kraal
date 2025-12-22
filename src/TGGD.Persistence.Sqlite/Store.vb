@@ -17,13 +17,13 @@ Public Class Store
 
     Public Function GetCount(
                             viewName As String,
-                            ParamArray filters() As (Column As String, Value As Object)) As Integer Implements IStore.GetCount
+                            ParamArray filters() As (Column As String, Compare As Compare, Value As Object)) As Integer Implements IStore.GetCount
         Using command As New SqliteCommand($"
 SELECT 
     COUNT(1) 
 FROM 
     {viewName}{If(filters.Length > 0, $"
-WHERE {String.Join(" AND ", filters.Select(Function(x) $"{x.Column}=@Filter{x.Column}"))}", "")};", connection)
+WHERE {String.Join(" AND ", filters.Select(Function(x) $"{x.Column}{ToOperator(x.Compare)}@Filter{x.Column}"))}", "")};", connection)
             For Each f In filters
                 command.Parameters.AddWithValue($"@Filter{f.Column}", f.Value)
             Next

@@ -1,7 +1,7 @@
 ﻿Public Interface IStore
     Function GetCount(
                      viewName As String,
-                     ParamArray filters() As (Column As String, Value As Object)) As Integer
+                     ParamArray filters() As (Column As String, Compare As Compare, Value As Object)) As Integer
     Function Create(
                    viewName As String,
                    columnValues As IEnumerable(Of (Column As String, Value As Object)),

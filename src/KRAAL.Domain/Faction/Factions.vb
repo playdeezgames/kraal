@@ -25,7 +25,7 @@ Friend Class Factions
         Get
             Return store.GetCount(
                 TABLE_FACTIONS,
-                (COLUMN_UNIVERSE_ID, universeId))
+                (COLUMN_UNIVERSE_ID, Compare.EQ, universeId))
         End Get
     End Property
 

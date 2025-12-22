@@ -25,7 +25,7 @@ Friend Class Stars
         Get
             Return store.GetCount(
                 TABLE_STARS,
-                (COLUMN_UNIVERSE_ID, universeId))
+                (COLUMN_UNIVERSE_ID, Compare.EQ, universeId))
         End Get
     End Property
 
