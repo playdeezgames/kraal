@@ -14,9 +14,15 @@ Friend Class StarModel
         End Get
     End Property
 
-    Public ReadOnly Property Position As (X As Double, Y As Double, Z As Double) Implements IStarModel.Position
+    Public ReadOnly Property LegacyPosition As (X As Double, Y As Double, Z As Double) Implements IStarModel.LegacyPosition
         Get
             Return (star.StarX, star.StarY, star.StarZ)
+        End Get
+    End Property
+
+    Public ReadOnly Property Position As IXYZModel Implements IStarModel.Position
+        Get
+            Return New XYZModel(star.XYZ)
         End Get
     End Property
 End Class

@@ -14,15 +14,15 @@ Friend Class ShipModel
         End Get
     End Property
 
-    Public ReadOnly Property Position As (X As Double, Y As Double, Z As Double) Implements IShipModel.Position
-        Get
-            Return (ship.ShipX, ship.ShipY, ship.ShipZ)
-        End Get
-    End Property
-
     Public ReadOnly Property NearbyStars As IEnumerable(Of IStarModel) Implements IShipModel.NearbyStars
         Get
             Return ship.GetNearbyStars(DEFAULT_SCANNER_RANGE).Select(Function(x) New StarModel(x))
+        End Get
+    End Property
+
+    Public ReadOnly Property Position As IXYZModel Implements IShipModel.Position
+        Get
+            Return New XYZModel(ship.XYZ)
         End Get
     End Property
 End Class

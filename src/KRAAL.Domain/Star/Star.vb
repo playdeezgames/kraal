@@ -53,4 +53,10 @@ Friend Class Star
                 (COLUMN_STAR_ID, Compare.EQ, StarId)))
         End Get
     End Property
+
+    Public ReadOnly Property XYZ As IXYZ Implements IStar.XYZ
+        Get
+            Return New StarXYZ(store, StarId)
+        End Get
+    End Property
 End Class

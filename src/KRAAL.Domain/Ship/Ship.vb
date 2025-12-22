@@ -39,6 +39,12 @@ Friend Class Ship
         End Get
     End Property
 
+    Public ReadOnly Property XYZ As IXYZ Implements IShip.XYZ
+        Get
+            Return New ShipXYZ(store, ShipId)
+        End Get
+    End Property
+
     Public Function GetNearbyStars(distance As Double) As IEnumerable(Of IStar) Implements IShip.GetNearbyStars
         Return store.GetRecords(Of IStar)(
             VIEW_STAR_SHIP_DISTANCES,

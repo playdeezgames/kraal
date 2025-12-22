@@ -160,4 +160,8 @@ WHERE {String.Join(" AND ", filters.Select(Function(x) $"{x.Column}{ToOperator(x
                 Throw New NotImplementedException
         End Select
     End Function
+
+    Public Function GetRecord(Of TResult As New)(viewName As String, columnNames As IEnumerable(Of String), filters As IEnumerable(Of (Column As String, Compare As Compare, Value As Object)), converter As Func(Of IRecord, TResult)) As TResult Implements IStore.GetRecord
+        Return GetRecords(viewName, columnNames, filters, converter).SingleOrDefault()
+    End Function
 End Class
