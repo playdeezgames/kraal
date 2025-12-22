@@ -21,7 +21,7 @@
                                    converter As Func(Of IRecord, TResult)) As IEnumerable(Of TResult)
     Sub Delete(
             viewName As String,
-            ParamArray filters() As (Column As String, Value As Object))
+            ParamArray filters() As (Column As String, Compare As Compare, Value As Object))
     Sub Export(filename As String)
     Sub Import(filename As String)
 End Interface

@@ -8,7 +8,9 @@ Public Class Universe
     End Sub
 
     Public Sub Remove() Implements IUniverse.Remove
-        store.Delete(TABLE_UNIVERSES, (COLUMN_UNIVERSE_ID, UniverseId))
+        store.Delete(
+            TABLE_UNIVERSES,
+            (COLUMN_UNIVERSE_ID, Compare.EQ, UniverseId))
     End Sub
 
     Private ReadOnly store As IStore

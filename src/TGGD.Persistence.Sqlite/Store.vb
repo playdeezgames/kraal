@@ -106,9 +106,9 @@ WHERE {String.Join(" AND ", filters.Select(Function(x) $"{x.Column}=@Filter{x.Co
 
     Public Sub Delete(
                      viewName As String,
-                     ParamArray filters() As (Column As String, Value As Object)) Implements IStore.Delete
+                     ParamArray filters() As (Column As String, Compare As Compare, Value As Object)) Implements IStore.Delete
         Using command As New SqliteCommand($"DELETE FROM {viewName}{If(filters.Length > 0, $"
-WHERE {String.Join(" AND ", filters.Select(Function(x) $"{x.Column}=@Filter{x.Column}"))}", "")};", connection)
+WHERE {String.Join(" AND ", filters.Select(Function(x) $"{x.Column}{ToOperator(x.Compare)}@Filter{x.Column}"))}", "")};", connection)
             For Each f In filters
                 command.Parameters.AddWithValue($"@Filter{f.Column}", f.Value)
             Next
