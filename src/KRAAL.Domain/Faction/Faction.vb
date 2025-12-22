@@ -15,7 +15,7 @@ Friend Class Faction
             Return CStr(store.GetColumnValue(TABLE_FACTIONS, COLUMN_FACTION_NAME, (COLUMN_FACTION_ID, FactionId)))
         End Get
         Set(value As String)
-            store.SetColumnValue(TABLE_FACTIONS, (COLUMN_FACTION_NAME, value), (COLUMN_FACTION_NAME, FactionId))
+            store.SetColumnValue(TABLE_FACTIONS, (COLUMN_FACTION_NAME, value), (COLUMN_FACTION_NAME, Compare.EQ, FactionId))
         End Set
     End Property
 

@@ -17,7 +17,7 @@ Friend Class Ship
             Return CStr(store.GetColumnValue(TABLE_SHIPS, COLUMN_SHIP_NAME, (COLUMN_SHIP_ID, ShipId)))
         End Get
         Set(value As String)
-            store.SetColumnValue(TABLE_SHIPS, (COLUMN_SHIP_NAME, value), (COLUMN_SHIP_ID, ShipId))
+            store.SetColumnValue(TABLE_SHIPS, (COLUMN_SHIP_NAME, value), (COLUMN_SHIP_ID, Compare.EQ, ShipId))
         End Set
     End Property
 

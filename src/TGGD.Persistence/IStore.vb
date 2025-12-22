@@ -13,7 +13,7 @@
     Sub SetColumnValue(
                       viewName As String,
                       columnValue As (Column As String, Value As Object),
-                      ParamArray filters() As (Column As String, Value As Object))
+                      ParamArray filters() As (Column As String, Compare As Compare, Value As Object))
     Function GetRecords(Of TResult)(
                                    viewName As String,
                                    columnNames As IEnumerable(Of String),

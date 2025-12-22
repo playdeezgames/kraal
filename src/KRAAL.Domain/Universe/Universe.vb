@@ -21,7 +21,7 @@ Public Class Universe
             Return CStr(store.GetColumnValue(TABLE_UNIVERSES, COLUMN_UNIVERSE_NAME, (COLUMN_UNIVERSE_ID, UniverseId)))
         End Get
         Set(value As String)
-            store.SetColumnValue(TABLE_UNIVERSES, (COLUMN_UNIVERSE_NAME, value), (COLUMN_UNIVERSE_ID, UniverseId))
+            store.SetColumnValue(TABLE_UNIVERSES, (COLUMN_UNIVERSE_NAME, value), (COLUMN_UNIVERSE_ID, Compare.EQ, UniverseId))
         End Set
     End Property
 
@@ -54,7 +54,7 @@ Public Class Universe
             Return New Party(store, CInt(store.GetColumnValue(TABLE_UNIVERSES, COLUMN_PLAYER_PARTY_ID, (COLUMN_UNIVERSE_ID, UniverseId))))
         End Get
         Set(value As IParty)
-            store.SetColumnValue(TABLE_UNIVERSES, (COLUMN_PLAYER_PARTY_ID, value.PartyId), (COLUMN_UNIVERSE_ID, UniverseId))
+            store.SetColumnValue(TABLE_UNIVERSES, (COLUMN_PLAYER_PARTY_ID, value.PartyId), (COLUMN_UNIVERSE_ID, Compare.EQ, UniverseId))
         End Set
     End Property
 End Class

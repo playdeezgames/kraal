@@ -21,7 +21,7 @@ Friend Class Star
             store.SetColumnValue(
                 TABLE_STARS,
                 (COLUMN_STAR_NAME, value),
-                (COLUMN_STAR_ID, StarId))
+                (COLUMN_STAR_ID, Compare.EQ, StarId))
         End Set
     End Property
 

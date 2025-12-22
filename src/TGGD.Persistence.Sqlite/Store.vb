@@ -89,13 +89,13 @@ WHERE {String.Join(" AND ", filters.Select(Function(x) $"{x.Column}=@Filter{x.Co
     Public Sub SetColumnValue(
                              viewName As String,
                              columnValue As (Column As String, Value As Object),
-                             ParamArray filters() As (Column As String, Value As Object)) Implements IStore.SetColumnValue
+                             ParamArray filters() As (Column As String, Compare As Compare, Value As Object)) Implements IStore.SetColumnValue
         Using command As New SqliteCommand($"
 UPDATE
     {viewName} 
 SET 
     {columnValue.Column}=@New{columnValue.Column}{If(filters.Length > 0, $"
-WHERE {String.Join(" AND ", filters.Select(Function(x) $"{x.Column}=@Filter{x.Column}"))}", "")};", connection)
+WHERE {String.Join(" AND ", filters.Select(Function(x) $"{x.Column}{ToOperator(x.Compare)}@Filter{x.Column}"))}", "")};", connection)
             command.Parameters.AddWithValue($"New{columnValue.Column}", columnValue.Value)
             For Each f In filters
                 command.Parameters.AddWithValue($"@Filter{f.Column}", f.Value)
