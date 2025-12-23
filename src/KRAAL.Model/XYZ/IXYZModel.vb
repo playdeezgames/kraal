@@ -3,4 +3,5 @@
     ReadOnly Property Y As Double
     ReadOnly Property Z As Double
     Function DistanceTo(other As IXYZModel) As Double
+    Function HeadingTo(other As IXYZModel) As IHeadingModel
 End Interface

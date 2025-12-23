@@ -8,6 +8,9 @@ Friend Module NearbyStarMenu
             Sub(addChoice, quit)
                 ui.Clear()
                 ui.WriteLine((Mood.Info, $"Nearby Star: {star.Name}"))
+                ui.WriteLine((Mood.Info, $"Distance: {star.Position.DistanceTo(ship.Position):f2}"))
+                Dim heading = ship.Position.HeadingTo(star.Position)
+                ui.WriteLine((Mood.Info, $"Heading: {heading.Theta:f2} mark {heading.Phi:f2}"))
                 addChoice("Never Mind", quit)
             End Sub)
     End Sub
