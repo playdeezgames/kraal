@@ -1,4 +1,5 @@
-﻿Imports TGGD.Persistence
+﻿Imports System.IO
+Imports TGGD.Persistence
 
 Friend Class XYZModel
     Implements IXYZModel
@@ -26,4 +27,8 @@ Friend Class XYZModel
             Return xyz.Z
         End Get
     End Property
+
+    Public Function DistanceTo(other As IXYZModel) As Double Implements IXYZModel.DistanceTo
+        Return Math.Pow(Math.Pow(X - other.X, 2) + Math.Pow(Y - other.Y, 2) + Math.Pow(Z - other.Z, 2), 0.5)
+    End Function
 End Class
